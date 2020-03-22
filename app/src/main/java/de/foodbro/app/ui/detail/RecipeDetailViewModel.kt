@@ -12,10 +12,9 @@ class RecipeDetailViewModel @Inject constructor(
 
     private val _recipeId = MutableLiveData<Int>()
 
-    private val _recipe = _recipeId.switchMap {
+    val recipe: LiveData<Recipe> = _recipeId.switchMap {
         recipeRepository.getById(it)
     }
-    val recipe: LiveData<Recipe> = _recipe
 
     val ingredients = _recipeId.switchMap {
         ingredientRepository.getAllByRecipeId(it)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
@@ -56,7 +57,8 @@ class RecipeDetailFragment : DaggerFragment() {
 
     private fun setupFab() {
         fab_edit_recipe.setOnClickListener {
-            Toast.makeText(context, "Todo: Open Edit View", Toast.LENGTH_SHORT).show()
+            val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToRecipeEditFragment()
+            findNavController().navigate(action)
         }
     }
 

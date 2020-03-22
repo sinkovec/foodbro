@@ -23,12 +23,6 @@ class IngredientsAdapter :
         holder.bind(item)
     }
 
-    private fun getBackgroundResource(index: Int): Int {
-        return if (isEven(index)) R.drawable.rounded_corner_gray else R.drawable.rounded_corner_white
-    }
-
-    private fun isEven(num: Int) = num % 2 == 0
-
     inner class ViewHolder(private val binding: ListItemDetailIngredientBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

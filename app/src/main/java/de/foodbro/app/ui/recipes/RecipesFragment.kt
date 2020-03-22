@@ -62,7 +62,8 @@ class RecipesFragment : DaggerFragment() {
 
     private fun setupFab() {
         fab_add_recipe.setOnClickListener {
-            Toast.makeText(context, "Todo: Open Edit View", Toast.LENGTH_SHORT).show()
+            val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragment()
+            findNavController().navigate(action)
         }
     }
 }
