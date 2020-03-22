@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Foodbro</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!-- Placeholder String in EditActivity -->
+    <string name="edit_name_placeholder">Name</string>
+    <string name="edit_description_placeholder">Description</string>
+
+
+    <string name="edit_summary_tab">Summary</string>
+    <string name="edit_ingredients_tab">Ingredients</string>
+    <string name="edit_preparation_tab">Preparation</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+</resources>
