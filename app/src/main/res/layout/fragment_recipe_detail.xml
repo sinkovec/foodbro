@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="viewmodel"
+            type="de.foodbro.app.ui.detail.RecipeDetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -19,12 +23,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/recipe_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
-                    android:textSize="36sp" />
+                    android:textSize="36sp"
+                    android:text="@{viewmodel.recipe.name}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -33,18 +37,19 @@
                     android:background="?android:attr/listDivider" />
 
                 <TextView
-                    android:id="@+id/recipe_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:text="@{viewmodel.recipe.description}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ingredients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    tools:listitem="@layout/list_item_detail_ingredient" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:items="@{viewmodel.ingredients}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -57,19 +62,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    tools:listitem="@layout/list_item_detail_preparation" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:items="@{viewmodel.recipe.preparation}" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_edit_recipe"
-            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_edit_white_24dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_edit_white_24dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/nested_scroll_view"
+            app:layout_anchorGravity="bottom|right|end" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

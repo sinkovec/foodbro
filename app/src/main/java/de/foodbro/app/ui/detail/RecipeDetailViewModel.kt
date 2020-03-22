@@ -1,31 +1,27 @@
 package de.foodbro.app.ui.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import de.foodbro.app.model.Ingredient
+import androidx.lifecycle.*
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.repository.IngredientRepository
 import de.foodbro.app.repository.RecipeRepository
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RecipeDetailViewModel @Inject constructor(
     private val recipeRepository: RecipeRepository,
     private val ingredientRepository: IngredientRepository) : ViewModel() {
 
-    lateinit var recipe: LiveData<Recipe>
+    private val _recipeId = MutableLiveData<Int>()
 
-    lateinit var ingredients: LiveData<List<Ingredient>>
+    private val _recipe = _recipeId.switchMap {
+        recipeRepository.getById(it)
+    }
+    val recipe: LiveData<Recipe> = _recipe
+
+    val ingredients = _recipeId.switchMap {
+        ingredientRepository.getAllByRecipeId(it)
+    }
 
     fun setup(recipeId: Int) {
-        viewModelScope.launch {
-            recipeRepository.getById(recipeId).let {
-                recipe = it
-            }
-            ingredientRepository.getAllByRecipeId(recipeId).let {
-                ingredients = it
-            }
-        }
+        _recipeId.value = recipeId
     }
 }

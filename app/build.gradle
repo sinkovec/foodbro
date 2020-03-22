@@ -24,9 +24,9 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    // dataBinding {
-    //    enabled = true
-    // }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -34,14 +34,12 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentsVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.archLifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.archLifecycleVersion"
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.testRunnerVersion"
 

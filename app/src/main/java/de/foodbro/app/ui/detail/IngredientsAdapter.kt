@@ -1,37 +1,26 @@
 package de.foodbro.app.ui.detail
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.R
+import de.foodbro.app.databinding.ListItemDetailIngredientBinding
 import de.foodbro.app.model.Ingredient
 
-
 class IngredientsAdapter :
-    RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
-
-    private var ingredients = emptyList<Ingredient>()
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        val ingredientTextView: TextView = itemView.findViewById(R.id.textView)
-    }
+    ListAdapter<Ingredient, IngredientsAdapter.ViewHolder>(IngredientDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.list_item_detail_ingredient, parent, false)
-        return ViewHolder(itemView)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ListItemDetailIngredientBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = ingredients.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val current = ingredients[position]
-        holder.ingredientTextView.text =
-            listOfNotNull(current.quantity, current.unit, current.name).joinToString(" ")
-        holder.ingredientTextView.setBackgroundResource(getBackgroundResource(position))
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     private fun getBackgroundResource(index: Int): Int {
@@ -40,8 +29,22 @@ class IngredientsAdapter :
 
     private fun isEven(num: Int) = num % 2 == 0
 
-    internal fun submitList(ingredients: List<Ingredient>) {
-        this.ingredients = ingredients
-        notifyDataSetChanged()
+    inner class ViewHolder(private val binding: ListItemDetailIngredientBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(ingredient: Ingredient) {
+            binding.ingredient = ingredient
+            binding.executePendingBindings()
+        }
+    }
+}
+
+class IngredientDiffCallback : DiffUtil.ItemCallback<Ingredient>() {
+    override fun areItemsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
+        return oldItem == newItem
     }
 }

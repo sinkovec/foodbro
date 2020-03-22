@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import de.foodbro.app.R
+import de.foodbro.app.databinding.FragmentRecipeDetailBinding
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
 import javax.inject.Inject
@@ -21,51 +22,36 @@ class RecipeDetailFragment : DaggerFragment() {
     @Inject
     lateinit var viewModel: RecipeDetailViewModel
 
+    private lateinit var viewDataBinding: FragmentRecipeDetailBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+        viewDataBinding = FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
         viewModel.setup(args.recipeId)
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
+        return viewDataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupName()
-        setupDescription()
         setupIngredientsList()
         setupPreparationsList()
         setupFab()
     }
 
-    private fun setupName() {
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            recipe_name.text = it.name
-        }
-    }
-
-    private fun setupDescription() {
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            recipe_description.text = it.description
-        }
-    }
-
     private fun setupIngredientsList() {
-        val adapter = IngredientsAdapter()
-        ingredients_list.adapter = adapter
-        ingredients_list.layoutManager = LinearLayoutManager(context)
-        viewModel.ingredients.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
+        val listAdapter = IngredientsAdapter()
+        viewDataBinding.ingredientsList.adapter = listAdapter
+
     }
 
     private fun setupPreparationsList() {
-        val adapter = PreparationsAdapter()
-        preparations_list.adapter = adapter
-        preparations_list.layoutManager = LinearLayoutManager(context)
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            adapter.submitList(it.preparation)
-        }
+        val listAdapter = PreparationsAdapter()
+        viewDataBinding.preparationsList.adapter = listAdapter
     }
 
     private fun setupFab() {

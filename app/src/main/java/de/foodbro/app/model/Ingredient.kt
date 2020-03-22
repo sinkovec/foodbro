@@ -19,4 +19,8 @@ data class Ingredient(
     var id: Int = 0
 
     var recipeId: Int = 0
+
+    override fun toString(): String {
+        return listOfNotNull(quantity, unit, name).joinToString(" ")
+    }
 }

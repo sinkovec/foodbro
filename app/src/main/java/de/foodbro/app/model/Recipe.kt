@@ -7,6 +7,8 @@ import de.foodbro.app.database.converter.StringListConverter
 
 @Entity(tableName = "recipe_table")
 data class Recipe(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
 
     var name: String,
 
@@ -16,7 +18,4 @@ data class Recipe(
 
     @TypeConverters(StringListConverter::class)
     var preparation: List<String>
-) {
-    @PrimaryKey
-    var id: Int = 0
-}
+)
