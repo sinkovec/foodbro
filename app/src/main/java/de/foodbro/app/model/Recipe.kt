@@ -14,8 +14,12 @@ data class Recipe @JvmOverloads constructor(
 
     var portions: Int? = null,
 
+    var difficulty: Int? = null,
+
+    var preparationTime: Int? = null,
+
     @TypeConverters(StringListConverter::class)
-    var preparation: List<String> = emptyList(),
+    var preparationSteps: List<String> = emptyList(),
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

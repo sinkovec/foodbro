@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="de.foodbro.app.ui.detail.RecipeDetailViewModel" />
     </data>
 
@@ -28,7 +29,7 @@
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
                     android:textSize="36sp"
-                    android:text="@{viewmodel.recipe.name}" />
+                    android:text="@{viewModel.recipe.name}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -41,15 +42,16 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:textSize="24sp"
-                    android:text="@{viewmodel.recipe.description}" />
+                    android:text="@{viewModel.recipe.description}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ingredients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:items="@{viewmodel.ingredients}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    android:items="@{viewModel.ingredients}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item_detail_ingredient" />
 
                 <View
                     android:layout_width="match_parent"
@@ -62,8 +64,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:items="@{viewmodel.recipe.preparation}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    android:items="@{viewModel.recipe.preparationSteps}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item_detail_preparation" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -73,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> viewmodel.editRecipe()}"
+            android:onClick="@{() -> viewModel.editRecipe()}"
             app:srcCompat="@drawable/ic_edit_white_24dp"
             app:fabSize="normal"
             app:layout_anchor="@id/detail_content"

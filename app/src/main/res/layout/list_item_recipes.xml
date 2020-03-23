@@ -6,7 +6,7 @@
             name="recipe"
             type="de.foodbro.app.model.Recipe" />
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="de.foodbro.app.ui.recipes.RecipesViewModel" />
     </data>
 
@@ -14,14 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:onClick="@{() -> viewmodel.openRecipe(recipe.id)}">
+        android:onClick="@{() -> viewModel.openRecipe(recipe.id)}">
 
         <TextView
             android:id="@+id/recipe_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@android:color/background_light"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="32sp"

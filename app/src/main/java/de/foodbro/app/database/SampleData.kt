@@ -12,7 +12,9 @@ fun chiliConCarneContentValues(): ContentValues {
         contentValuesOf(Pair("name", it.name),
             Pair("description", it.description),
             Pair("portions", it.portions),
-            Pair("preparation", chiliConCarnePreparation()))
+            Pair("difficulty", it.difficulty),
+            Pair("preparationTime", it.preparationTime),
+            Pair("preparationSteps", chiliConCarnePreparation()))
     }.reduce(ContentValues()) { _,b -> b }
 }
 
@@ -42,7 +44,9 @@ fun chiliConCarne(): String {
             "name": "Chili Con Carne",
             "description": "Das ist eine Beschreibung für chili con carne",
             "portions": 4,
-            "preparation": []
+            "difficulty": 1,
+            "preparationTime": 30,
+            "preparationSteps": []
         }
     """
 }

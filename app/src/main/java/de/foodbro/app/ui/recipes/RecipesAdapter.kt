@@ -29,7 +29,7 @@ class RecipesAdapter(private val viewModel: RecipesViewModel) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: RecipesViewModel, recipe: Recipe) {
-            binding.viewmodel = viewModel
+            binding.viewModel = viewModel
             binding.recipe = recipe
             binding.executePendingBindings()
         }

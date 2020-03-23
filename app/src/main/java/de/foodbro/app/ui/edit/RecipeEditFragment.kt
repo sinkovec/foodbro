@@ -27,8 +27,8 @@ class RecipeEditFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewDataBinding = FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
-            viewmodel = viewModel
-            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@RecipeEditFragment.viewModel
+            lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
         }
         viewModel.setup(args.recipeId)
         return viewDataBinding.root

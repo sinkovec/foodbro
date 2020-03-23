@@ -27,8 +27,8 @@ class RecipeDetailFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewDataBinding = FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
-            viewmodel = viewModel
-            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@RecipeDetailFragment.viewModel
+            lifecycleOwner = this@RecipeDetailFragment.viewLifecycleOwner
         }
         viewModel.setup(args.recipeId)
         return viewDataBinding.root

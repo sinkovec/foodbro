@@ -30,8 +30,8 @@ class RecipesFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewDataBinding = FragmentRecipesBinding.inflate(inflater, container, false).apply {
-            viewmodel = viewModel
-            lifecycleOwner = viewLifecycleOwner
+            viewModel = this@RecipesFragment.viewModel
+            lifecycleOwner = this@RecipesFragment.viewLifecycleOwner
         }
         return viewDataBinding.root
     }

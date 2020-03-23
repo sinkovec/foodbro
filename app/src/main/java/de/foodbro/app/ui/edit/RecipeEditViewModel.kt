@@ -1,7 +1,5 @@
 package de.foodbro.app.ui.edit
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.repository.IngredientRepository
@@ -19,8 +17,10 @@ class RecipeEditViewModel @Inject constructor(
 
     val name = MutableLiveData<String>()
     val description = MutableLiveData<String>()
-    val portions = MutableLiveData<Int>(2)
+    val portions = MutableLiveData<Int>()
+    val difficulty = MutableLiveData<Int>()
     val preparationTime = MutableLiveData<Int>()
+    val preparationSteps = MutableLiveData<List<String>>()
 
     private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
     val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
@@ -46,13 +46,19 @@ class RecipeEditViewModel @Inject constructor(
         name.value = recipe.name
         description.value = recipe.description
         portions.value = recipe.portions
+        difficulty.value = recipe.difficulty
+        preparationTime.value = recipe.preparationTime
+        preparationSteps.value = recipe.preparationSteps
     }
 
     fun saveRecipe() {
         val currentId = _recipeId.value
         val currentName = name.value
         val currentDescription = description.value.orEmpty()
+        val currentDifficulty = difficulty.value
         val currentPortions = portions.value
+        val currentPreparationTime = preparationTime.value
+        val currentPreparationSteps = preparationSteps.value.orEmpty()
 
         if (currentName.isNullOrBlank()) {
             // todo: error message
@@ -60,9 +66,9 @@ class RecipeEditViewModel @Inject constructor(
         }
 
         if (currentId == null) {
-            insertRecipe(Recipe(currentName, currentDescription, currentPortions, emptyList()))
+            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime, currentPreparationSteps))
         } else {
-            insertRecipe(Recipe(currentName, currentDescription, currentPortions, emptyList(), currentId))
+            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime, currentPreparationSteps, currentId))
         }
     }
 
