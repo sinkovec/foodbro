@@ -11,12 +11,19 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     recipeRepository: RecipeRepository) : ViewModel() {
 
-    val items: LiveData<List<Recipe>> = recipeRepository.getAll()
+    val items: LiveData<List<Recipe>> = recipeRepository.observeAll()
 
     private val _openRecipeEvent = MutableLiveData<Event<Int>>()
     val openRecipeEvent: LiveData<Event<Int>> = _openRecipeEvent
 
+    private val _newRecipeEvent = MutableLiveData<Event<Unit>>()
+    val newRecipeEvent: LiveData<Event<Unit>> = _newRecipeEvent
+
     fun openRecipe(recipeId: Int) {
         _openRecipeEvent.value = Event(recipeId)
+    }
+
+    fun newRecipe() {
+        _newRecipeEvent.value = Event(Unit)
     }
 }

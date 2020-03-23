@@ -7,20 +7,17 @@ import de.foodbro.app.database.converter.UnitConverter
 
 @Entity(tableName = "ingredient_table")
 data class Ingredient(
-
-    var name: String,
+    var name: String = "",
 
     var quantity: Int? = null,
 
     @TypeConverters(UnitConverter::class)
-    var unit: Unit? = null
-) {
+    var unit: Unit? = null,
+
+    var recipeId: Int = 0,
+
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-
-    var recipeId: Int = 0
-
-    override fun toString(): String {
-        return listOfNotNull(quantity, unit, name).joinToString(" ")
-    }
+) {
+    override fun toString() = listOfNotNull(quantity, unit, name).joinToString(" ")
 }

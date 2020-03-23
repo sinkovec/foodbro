@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipeId"
-            app:argType="integer" />
+            app:argType="de.foodbro.app.util.IntArg" />
         <action
             android:id="@+id/action_recipe_detail_fragment_dest_to_recipeEditFragment"
             app:destination="@id/recipe_edit_fragment_dest" />
@@ -36,8 +36,11 @@
         tools:layout="@layout/fragment_recipe_edit">
         <argument
             android:name="recipeId"
-            app:argType="kotlin.Int"
+            app:argType="de.foodbro.app.util.IntArg"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_recipe_edit_fragment_dest_to_recipes_fragment_dest"
+            app:destination="@id/recipes_fragment_dest" />
     </fragment>
 </navigation>

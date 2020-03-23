@@ -5,13 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "label_table")
 data class Label(
-
-    var name: String,
+    var name: String = "",
 
     // var color
 
-    var recipeId: Int
-) {
+    var recipeId: Int = 0,
+
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-}
+)

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nested_scroll_view"
+            android:id="@+id/detail_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -48,8 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:items="@{viewmodel.ingredients}" />
+                    android:items="@{viewmodel.ingredients}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <View
                     android:layout_width="match_parent"
@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:items="@{viewmodel.recipe.preparation}" />
+                    android:items="@{viewmodel.recipe.preparation}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -73,9 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{() -> viewmodel.editRecipe()}"
             app:srcCompat="@drawable/ic_edit_white_24dp"
             app:fabSize="normal"
-            app:layout_anchor="@id/nested_scroll_view"
+            app:layout_anchor="@id/detail_content"
             app:layout_anchorGravity="bottom|right|end" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

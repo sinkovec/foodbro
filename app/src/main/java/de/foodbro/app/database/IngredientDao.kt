@@ -25,7 +25,7 @@ interface IngredientDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(ingredient: Ingredient): Long
+    fun insert(ingredient: Ingredient)
 
     @Query("DELETE FROM ingredient_table")
     fun deleteAll()

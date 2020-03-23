@@ -8,17 +8,20 @@ import de.foodbro.app.model.Recipe
 interface RecipeDao {
 
     @Query("SELECT * FROM recipe_table")
-    fun getAll(): LiveData<List<Recipe>>
+    fun observeAll(): LiveData<List<Recipe>>
 
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    fun getById(id: Int): LiveData<Recipe>
+    fun observeById(id: Int): LiveData<Recipe>
+
+    @Query("SELECT * FROM recipe_table WHERE id = :id")
+    suspend fun getById(id: Int): Recipe?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(recipe: Recipe): Long
-
-    @Query("DELETE FROM recipe_table")
-    fun deleteAll()
+    suspend fun insert(recipe: Recipe)
 
     @Delete
     fun delete(recipe: Recipe)
+
+    @Query("DELETE FROM recipe_table")
+    fun deleteAll()
 }

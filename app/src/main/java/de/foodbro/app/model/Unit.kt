@@ -3,9 +3,7 @@ package de.foodbro.app.model
 import androidx.room.Entity
 
 @Entity(tableName = "unit_table")
-enum class Unit(val id: Int, val abbreviation: String) {
-    EMPTY(-1, ""),
-
+enum class Unit(val id: Int, private final val abbreviation: String) {
     MILLIGRAM(0, "mg"),
     GRAM(1,"g"),
     KILOGRAM(2, "kg"),

@@ -10,9 +10,11 @@ import javax.inject.Singleton
 class RecipeRepository
     @Inject constructor(private val recipeDao: RecipeDao) {
 
-    fun getAll(): LiveData<List<Recipe>> = recipeDao.getAll()
+    fun observeAll(): LiveData<List<Recipe>> = recipeDao.observeAll()
 
-    fun getById(id: Int): LiveData<Recipe> = recipeDao.getById(id)
+    fun observeById(id: Int): LiveData<Recipe> = recipeDao.observeById(id)
 
-    fun insert(recipe: Recipe) = recipeDao.insert(recipe)
+    suspend fun getById(id: Int): Recipe? = recipeDao.getById(id)
+
+    suspend fun insert(recipe: Recipe) = recipeDao.insert(recipe)
 }

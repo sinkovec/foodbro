@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewmodel"
             type="de.foodbro.app.ui.recipes.RecipesViewModel" />
@@ -17,18 +18,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/lightGray"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewmodel.items}" />
+            android:items="@{viewmodel.items}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_add_white_36dp"
+            android:onClick="@{() -> viewmodel.newRecipe()}"
             app:fabSize="normal"
             app:layout_anchor="@id/recipe_list"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|right|end"
+            app:srcCompat="@drawable/ic_add_white_36dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

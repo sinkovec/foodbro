@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
-import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
-import kotlinx.android.synthetic.main.fragment_recipe_detail.*
+import de.foodbro.app.ui.EventObserver
+import de.foodbro.app.util.IntArg
 
 import javax.inject.Inject
 
@@ -27,7 +24,8 @@ class RecipeDetailFragment : DaggerFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         viewDataBinding = FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
@@ -39,9 +37,19 @@ class RecipeDetailFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setupNavigation()
         setupIngredientsList()
         setupPreparationsList()
-        setupFab()
+    }
+
+    private fun setupNavigation() {
+        viewModel.editRecipeEvent.observe(viewLifecycleOwner, EventObserver {
+            val action =
+                RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToRecipeEditFragment(
+                    args.recipeId
+                )
+            findNavController().navigate(action)
+        })
     }
 
     private fun setupIngredientsList() {
@@ -54,12 +62,4 @@ class RecipeDetailFragment : DaggerFragment() {
         val listAdapter = PreparationsAdapter()
         viewDataBinding.preparationsList.adapter = listAdapter
     }
-
-    private fun setupFab() {
-        fab_edit_recipe.setOnClickListener {
-            val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToRecipeEditFragment()
-            findNavController().navigate(action)
-        }
-    }
-
 }

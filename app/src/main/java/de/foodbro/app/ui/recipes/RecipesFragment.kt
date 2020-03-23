@@ -14,6 +14,7 @@ import dagger.android.support.DaggerFragment
 import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipesBinding
 import de.foodbro.app.ui.EventObserver
+import de.foodbro.app.util.IntArg
 import kotlinx.android.synthetic.main.fragment_recipes.*
 import javax.inject.Inject
 
@@ -40,18 +41,25 @@ class RecipesFragment : DaggerFragment() {
 
         setupNavigation()
         setupListAdapter()
-        setupFab()
     }
 
     private fun setupNavigation() {
         viewModel.openRecipeEvent.observe(viewLifecycleOwner, EventObserver {
             openRecipeDetails(it)
         })
+        viewModel.newRecipeEvent.observe(viewLifecycleOwner, EventObserver {
+            openNewRecipe()
+        })
     }
 
     private fun openRecipeDetails(recipeId: Int) {
         val action =
-            RecipesFragmentDirections.actionRecipesFragmentDestToRecipeDetailFragment(recipeId)
+            RecipesFragmentDirections.actionRecipesFragmentDestToRecipeDetailFragment(IntArg(recipeId))
+        findNavController().navigate(action)
+    }
+
+    private fun openNewRecipe() {
+        val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragment()
         findNavController().navigate(action)
     }
 
@@ -60,10 +68,4 @@ class RecipesFragment : DaggerFragment() {
         viewDataBinding.recipeList.adapter = listAdapter
     }
 
-    private fun setupFab() {
-        fab_add_recipe.setOnClickListener {
-            val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragment()
-            findNavController().navigate(action)
-        }
-    }
 }
