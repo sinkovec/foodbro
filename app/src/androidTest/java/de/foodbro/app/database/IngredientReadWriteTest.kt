@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.model.Unit
+import de.foodbro.app.model.Units
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -64,7 +64,7 @@ class IngredientReadWriteTest {
 
     private fun createIngredients(): List<Ingredient> {
         return listOf(
-            Ingredient("ingredient1", 2, Unit.MILLIGRAM),
+            Ingredient("ingredient1", 2, Units.MILLIGRAM),
             Ingredient("ingredient2"))
     }
 

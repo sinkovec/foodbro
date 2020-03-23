@@ -19,7 +19,7 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
     val ingredients = _recipeId.switchMap {
-        ingredientRepository.getAllByRecipeId(it)
+        ingredientRepository.observeByRecipeId(it)
     }
 
     private val _editRecipeEvent = MutableLiveData<Event<Unit>>()

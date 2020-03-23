@@ -12,7 +12,7 @@ data class Ingredient(
     var quantity: Int? = null,
 
     @TypeConverters(UnitConverter::class)
-    var unit: Unit? = null,
+    var unit: Units? = null,
 
     var recipeId: Int = 0,
 

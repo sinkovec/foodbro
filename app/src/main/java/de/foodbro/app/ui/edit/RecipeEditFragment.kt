@@ -1,16 +1,18 @@
 package de.foodbro.app.ui.edit
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.DaggerFragment
+import de.foodbro.app.R
 
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
-import de.foodbro.app.ui.detail.RecipeDetailFragmentDirections
 import javax.inject.Inject
 
 class RecipeEditFragment : DaggerFragment() {
@@ -19,6 +21,9 @@ class RecipeEditFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModel: RecipeEditViewModel
+
+    @Inject
+    lateinit var listAdapter: IngredientsAdapter
 
     private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
@@ -29,6 +34,7 @@ class RecipeEditFragment : DaggerFragment() {
         viewDataBinding = FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeEditFragment.viewModel
             lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
+            ingredientsList.adapter = this@RecipeEditFragment.listAdapter
         }
         viewModel.setup(args.recipeId)
         return viewDataBinding.root
@@ -38,13 +44,29 @@ class RecipeEditFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         setupNavigation()
+        setupIngredientsList()
     }
 
     private fun setupNavigation() {
         viewModel.recipeUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
-            val action = RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipesFragmentDest()
+            val action =
+                RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipesFragmentDest()
             findNavController().navigate(action)
         })
+    }
+
+    private fun setupIngredientsList() {
+        // set spacing between items
+        val space = resources.getDimensionPixelSize(R.dimen.list_item_spacing)
+        viewDataBinding.ingredientsList.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect, view: View,
+                parent: RecyclerView, state: RecyclerView.State
+            ) {
+                outRect.bottom = space
+            }
+        })
+
     }
 
 }

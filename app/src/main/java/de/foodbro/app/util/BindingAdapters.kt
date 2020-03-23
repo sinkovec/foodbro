@@ -6,7 +6,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.ui.detail.IngredientsAdapter
+import de.foodbro.app.ui.adapter.AbstractIngredientsAdapter
 import de.foodbro.app.ui.detail.PreparationsAdapter
 import de.foodbro.app.ui.recipes.RecipesAdapter
 
@@ -20,7 +20,7 @@ fun setItems(listView: RecyclerView, items: List<Recipe>?) {
 @BindingAdapter("android:items")
 fun setIngredientItems(listView: RecyclerView, items: List<Ingredient>?) {
     items?.let {
-        (listView.adapter as IngredientsAdapter).submitList(it)
+        (listView.adapter as AbstractIngredientsAdapter<*>).submitList(it)
     }
 }
 

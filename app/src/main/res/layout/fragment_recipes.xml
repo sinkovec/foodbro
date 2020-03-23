@@ -18,7 +18,8 @@
             android:id="@+id/recipe_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:items="@{viewModel.items}"
+            android:layout_marginHorizontal="@dimen/content_horizontal_margin"
+            android:items="@{viewModel.recipes}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_recipes" />
 

@@ -1,6 +1,7 @@
 package de.foodbro.app.ui.edit
 
 import androidx.lifecycle.*
+import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.repository.IngredientRepository
 import de.foodbro.app.repository.RecipeRepository
@@ -22,6 +23,8 @@ class RecipeEditViewModel @Inject constructor(
     val preparationTime = MutableLiveData<Int>()
     val preparationSteps = MutableLiveData<List<String>>()
 
+    val ingredients = MutableLiveData<List<Ingredient>>()
+
     private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
     val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
 
@@ -31,14 +34,23 @@ class RecipeEditViewModel @Inject constructor(
             return
         }
         _recipeId.value = recipeId.arg
-        viewModelScope.launch {
-            recipeRepository.getById(recipeId.arg).let {
-                if (it == null) {
-                    // todo: error message
-                } else {
-                    onRecipeLoaded(it)
-                }
+        loadRecipe(recipeId.arg)
+        loadIngredients(recipeId.arg)
+    }
+
+    private fun loadRecipe(recipeId: Int) = viewModelScope.launch {
+        recipeRepository.getById(recipeId).let {
+            if (it == null) {
+                TODO("error message")
+            } else {
+                onRecipeLoaded(it)
             }
+        }
+    }
+
+    private fun loadIngredients(recipeId: Int) = viewModelScope.launch {
+        ingredientRepository.getByRecipeId(recipeId).let {
+            ingredients.value = it
         }
     }
 
@@ -61,8 +73,7 @@ class RecipeEditViewModel @Inject constructor(
         val currentPreparationSteps = preparationSteps.value.orEmpty()
 
         if (currentName.isNullOrBlank()) {
-            // todo: error message
-            return
+            TODO("error message")
         }
 
         if (currentId == null) {

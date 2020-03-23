@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.databinding.ListItemDetailPreparationBinding
+import de.foodbro.app.util.StringDiffCallback
 
 class PreparationsAdapter :
     ListAdapter<String, PreparationsAdapter.ViewHolder>(StringDiffCallback()) {
@@ -28,15 +29,5 @@ class PreparationsAdapter :
             binding.preparation = preparation
             binding.executePendingBindings()
         }
-    }
-}
-
-class StringDiffCallback : DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-        return areContentsTheSame(oldItem, newItem)
-    }
-
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-        return oldItem == newItem
     }
 }

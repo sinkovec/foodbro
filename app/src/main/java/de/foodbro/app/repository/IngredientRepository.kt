@@ -11,7 +11,9 @@ import javax.inject.Singleton
 class IngredientRepository
     @Inject constructor(private val ingredientDao: IngredientDao) {
 
-    fun getAllByRecipeId(id: Int): LiveData<List<Ingredient>> = ingredientDao.getAllByRecipeId(id)
+    fun observeByRecipeId(id: Int): LiveData<List<Ingredient>> = ingredientDao.observeByRecipeId(id)
+
+    suspend fun getByRecipeId(id: Int): List<Ingredient> = ingredientDao.getByRecipeId(id)
 
     fun insertAllForRecipe(recipe: Recipe, ingredients: List<Ingredient>) =
         ingredientDao.insertAllForRecipe(recipe, ingredients)

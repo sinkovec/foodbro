@@ -8,11 +8,11 @@ import de.foodbro.app.model.Recipe
 @Dao
 interface IngredientDao {
 
-    @Query("SELECT * FROM ingredient_table")
-    fun getAll(): LiveData<List<Ingredient>>
+    @Query("SELECT * FROM ingredient_table WHERE recipeId = :id")
+    fun observeByRecipeId(id: Int): LiveData<List<Ingredient>>
 
     @Query("SELECT * FROM ingredient_table WHERE recipeId = :id")
-    fun getAllByRecipeId(id: Int): LiveData<List<Ingredient>>
+    suspend fun getByRecipeId(id: Int): List<Ingredient>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(ingredients: List<Ingredient>)

@@ -1,12 +1,12 @@
 package de.foodbro.app.di
 
+import android.app.Application
 import androidx.room.OnConflictStrategy
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
-import de.foodbro.app.App
 import de.foodbro.app.database.*
 import javax.inject.Singleton
 
@@ -15,8 +15,8 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun providesRoomDatabase(app: App): AppDatabase {
-        return Room.inMemoryDatabaseBuilder(app, AppDatabase::class.java)
+    fun providesRoomDatabase(application: Application): AppDatabase {
+        return Room.inMemoryDatabaseBuilder(application, AppDatabase::class.java)
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)

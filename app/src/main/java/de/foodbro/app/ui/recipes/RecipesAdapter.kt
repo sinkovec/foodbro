@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemRecipesBinding
 import de.foodbro.app.model.Recipe
+import de.foodbro.app.util.RecipeDiffCallback
 
 class RecipesAdapter(private val viewModel: RecipesViewModel) :
     ListAdapter<Recipe, RecipesAdapter.ViewHolder>(RecipeDiffCallback()) {
@@ -33,15 +34,5 @@ class RecipesAdapter(private val viewModel: RecipesViewModel) :
             binding.recipe = recipe
             binding.executePendingBindings()
         }
-    }
-}
-
-class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
-    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem == newItem
     }
 }
