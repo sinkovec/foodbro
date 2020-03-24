@@ -4,6 +4,7 @@ import android.content.ContentValues
 import androidx.core.content.contentValuesOf
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import de.foodbro.app.model.Ingredient
+import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.model.Recipe
 import java.util.stream.Collectors
 
@@ -13,8 +14,7 @@ fun chiliConCarneContentValues(): ContentValues {
             Pair("description", it.description),
             Pair("portions", it.portions),
             Pair("difficulty", it.difficulty),
-            Pair("preparationTime", it.preparationTime),
-            Pair("preparationSteps", chiliConCarnePreparation()))
+            Pair("preparationTime", it.preparationTime))
     }.reduce(ContentValues()) { _,b -> b }
 }
 
@@ -23,6 +23,14 @@ fun chiliConCarneIngredientsContentValues(recipeId: Int): List<ContentValues> {
         contentValuesOf(Pair("name", it.name),
             Pair("quantity", it.quantity),
             Pair("unit", it.unit?.id),
+            Pair("recipeId", recipeId))
+    }.collect(Collectors.toList())
+}
+
+fun chiliConCarnePreparationContentValues(recipeId: Int): List<ContentValues> {
+    return getSamplePreparationData().stream().map {
+        contentValuesOf(Pair("text", it.text),
+            Pair("pos", it.pos),
             Pair("recipeId", recipeId))
     }.collect(Collectors.toList())
 }
@@ -38,6 +46,12 @@ fun getSampleIngredientData(): List<Ingredient> {
         mapper.typeFactory.constructCollectionType(List::class.java, Ingredient::class.java))
 }
 
+fun getSamplePreparationData(): List<PreparationStep> {
+    val mapper = jacksonObjectMapper()
+    return mapper.readValue(chiliConCarnePreparation(),
+        mapper.typeFactory.constructCollectionType(List::class.java, PreparationStep::class.java))
+}
+
 fun chiliConCarne(): String {
     return """
         {
@@ -45,8 +59,7 @@ fun chiliConCarne(): String {
             "description": "Das ist eine Beschreibung für chili con carne",
             "portions": 4,
             "difficulty": 1,
-            "preparationTime": 30,
-            "preparationSteps": []
+            "preparationTime": 30
         }
     """
 }
@@ -54,11 +67,26 @@ fun chiliConCarne(): String {
 fun chiliConCarnePreparation(): String {
     return """
         [
-            "Die Zwiebeln abziehen, in Würfel schneiden und in einem tiefen Topf oder Bräter im Öl goldgelb anbraten. Hackfleisch zufügen, gut anbraten und Farbe nehmen lassen. Dabei ab und zu umrühren und das Hackfleisch zerkleinern.", 
-            "Paprika putzen, in Würfel schneiden und zum Hackfleisch geben. Tomatenmark zufügen und etwas anrösten. Die Tomaten, den gepellten und zerkleinerten Knoblauch sowie Gewürze (Zucker, Salz, Pfeffer, Paprika, Tabasco, Chili oder Cayenne) zugeben. Allerdings lieber erst einmal etwas vorsichtiger würzen und gegebenenfalls nach der Kochzeit nachwürzen. Mit Brühe auffüllen und bei mittlerer Hitze einkochen lassen, ist die Flüssigkeit verkocht, immer wieder Brühe angießen.", 
-            "Kurz vor Ende der Garzeit Bohnen und Mais aus der Dose befreien, gründlich abspülen und zufügen. Diese nur kurz wenige Minuten mitgaren. Anschließend alles noch einmal abschmecken und gegebenenfalls nachwürzen. Am besten schmeckt ein Chili gut durchgezogen, ist also wunderbar am Tag vorher vorzubereiten!", 
-            "Anrichten: Chili con Carne in einem tiefen Teller oder einer Schüssel servieren. Dazu passt ein knuspriges Baguette, Tortillas oder Nachos.", 
-            "Tipps: Wahlweise kann das Chili auch mit klein geschnittenem Fleisch und frischen Chilischoten zubereitet werden.\nWer seinem \"normalen\" Chili einmal eine etwas andere Geschmacksrichtung geben möchte, verfeinert das obige Rezept mit einem Teelöffel Kreuzkümmel, einem Esslöffel dunklem Kakaopulver und einem doppelten Espresso! Guten Appetit!"
+            {
+                "text": "Die Zwiebeln abziehen, in Würfel schneiden und in einem tiefen Topf oder Bräter im Öl goldgelb anbraten. Hackfleisch zufügen, gut anbraten und Farbe nehmen lassen. Dabei ab und zu umrühren und das Hackfleisch zerkleinern.",
+                "pos": 0
+            },
+            {
+                "text": "Paprika putzen, in Würfel schneiden und zum Hackfleisch geben. Tomatenmark zufügen und etwas anrösten. Die Tomaten, den gepellten und zerkleinerten Knoblauch sowie Gewürze (Zucker, Salz, Pfeffer, Paprika, Tabasco, Chili oder Cayenne) zugeben. Allerdings lieber erst einmal etwas vorsichtiger würzen und gegebenenfalls nach der Kochzeit nachwürzen. Mit Brühe auffüllen und bei mittlerer Hitze einkochen lassen, ist die Flüssigkeit verkocht, immer wieder Brühe angießen.",
+                "pos": 2
+            },
+            {
+                "text": "Kurz vor Ende der Garzeit Bohnen und Mais aus der Dose befreien, gründlich abspülen und zufügen. Diese nur kurz wenige Minuten mitgaren. Anschließend alles noch einmal abschmecken und gegebenenfalls nachwürzen. Am besten schmeckt ein Chili gut durchgezogen, ist also wunderbar am Tag vorher vorzubereiten!",
+                "pos": 3
+            },
+            {
+                "text": "Anrichten: Chili con Carne in einem tiefen Teller oder einer Schüssel servieren. Dazu passt ein knuspriges Baguette, Tortillas oder Nachos.",
+                "pos": 4
+            },
+            {
+                "text": "Tipps: Wahlweise kann das Chili auch mit klein geschnittenem Fleisch und frischen Chilischoten zubereitet werden.\nWer seinem \"normalen\" Chili einmal eine etwas andere Geschmacksrichtung geben möchte, verfeinert das obige Rezept mit einem Teelöffel Kreuzkümmel, einem Esslöffel dunklem Kakaopulver und einem doppelten Espresso! Guten Appetit!",
+                "pos": 5
+            }
         ]
     """
 }

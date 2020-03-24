@@ -2,24 +2,27 @@ package de.foodbro.app.ui.detail
 
 import androidx.lifecycle.*
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.repository.IngredientRepository
-import de.foodbro.app.repository.RecipeRepository
+import de.foodbro.app.repository.RecipeDetailRepository
+import de.foodbro.app.repository.RecipesRepository
 import de.foodbro.app.ui.Event
 import de.foodbro.app.util.IntArg
 import javax.inject.Inject
 
 class RecipeDetailViewModel @Inject constructor(
-    private val recipeRepository: RecipeRepository,
-    private val ingredientRepository: IngredientRepository) : ViewModel() {
+    private val recipeDetailRepository: RecipeDetailRepository) : ViewModel() {
 
     private val _recipeId = MutableLiveData<Int>()
 
     val recipe: LiveData<Recipe> = _recipeId.switchMap {
-        recipeRepository.observeById(it)
+        recipeDetailRepository.observeRecipeById(it)
     }
 
     val ingredients = _recipeId.switchMap {
-        ingredientRepository.observeByRecipeId(it)
+        recipeDetailRepository.observeIngredientsByRecipeId(it)
+    }
+
+    val preparationSteps = _recipeId.switchMap {
+        recipeDetailRepository.observePreparationStepsByRecipeId(it)
     }
 
     private val _editRecipeEvent = MutableLiveData<Event<Unit>>()

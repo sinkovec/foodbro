@@ -1,15 +1,13 @@
 package de.foodbro.app.ui.recipes
 
 import androidx.lifecycle.*
-import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.repository.IngredientRepository
-import de.foodbro.app.repository.RecipeRepository
+import de.foodbro.app.repository.RecipesRepository
 import de.foodbro.app.ui.Event
 import javax.inject.Inject
 
 class RecipesViewModel @Inject constructor(
-    recipeRepository: RecipeRepository) : ViewModel() {
+    recipeRepository: RecipesRepository) : ViewModel() {
 
     val recipes: LiveData<List<Recipe>> = recipeRepository.observeAll()
 

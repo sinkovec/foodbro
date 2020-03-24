@@ -3,7 +3,7 @@ package de.foodbro.app.model
 import androidx.room.Entity
 
 @Entity(tableName = "unit_table")
-enum class Units(val id: Int, private final val abbreviation: String) {
+enum class Units(val id: Int, private val abbreviation: String) {
     MILLIGRAM(0, "mg"),
     GRAM(1,"g"),
     KILOGRAM(2, "kg"),
@@ -29,5 +29,10 @@ enum class Units(val id: Int, private final val abbreviation: String) {
 
     override fun toString(): String {
         return abbreviation
+    }
+
+    companion object {
+        @JvmStatic
+        fun getValue(str: String): Units? = values().find { it.abbreviation == str }
     }
 }

@@ -23,7 +23,7 @@ class RecipeEditFragment : DaggerFragment() {
     lateinit var viewModel: RecipeEditViewModel
 
     @Inject
-    lateinit var listAdapter: IngredientsAdapter
+    lateinit var ingredientsAdapter: IngredientsAdapter
 
     private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
@@ -34,7 +34,8 @@ class RecipeEditFragment : DaggerFragment() {
         viewDataBinding = FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeEditFragment.viewModel
             lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
-            ingredientsList.adapter = this@RecipeEditFragment.listAdapter
+            ingredientsList.adapter = this@RecipeEditFragment.ingredientsAdapter
+            preparationsList.adapter = PreparationsAdapter()
         }
         viewModel.setup(args.recipeId)
         return viewDataBinding.root
@@ -66,7 +67,6 @@ class RecipeEditFragment : DaggerFragment() {
                 outRect.bottom = space
             }
         })
-
     }
 
 }

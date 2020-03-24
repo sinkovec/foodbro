@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:items="@{viewModel.recipe.preparationSteps}"
+                    android:items="@{viewModel.preparationSteps}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/list_item_detail_preparation" />
 

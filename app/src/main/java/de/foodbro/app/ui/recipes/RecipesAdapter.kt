@@ -11,9 +11,11 @@ import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemRecipesBinding
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.util.RecipeDiffCallback
+import javax.inject.Inject
 
-class RecipesAdapter(private val viewModel: RecipesViewModel) :
-    ListAdapter<Recipe, RecipesAdapter.ViewHolder>(RecipeDiffCallback()) {
+class RecipesAdapter @Inject constructor(
+    private val viewModel: RecipesViewModel
+) : ListAdapter<Recipe, RecipesAdapter.ViewHolder>(RecipeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -23,13 +25,13 @@ class RecipesAdapter(private val viewModel: RecipesViewModel) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(viewModel, item)
+        holder.bind(item)
     }
 
     inner class ViewHolder(private val binding: ListItemRecipesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: RecipesViewModel, recipe: Recipe) {
+        fun bind(recipe: Recipe) {
             binding.viewModel = viewModel
             binding.recipe = recipe
             binding.executePendingBindings()

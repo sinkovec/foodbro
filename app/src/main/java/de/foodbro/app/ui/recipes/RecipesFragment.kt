@@ -23,6 +23,9 @@ class RecipesFragment : DaggerFragment() {
     @Inject
     lateinit var viewModel: RecipesViewModel
 
+    @Inject
+    lateinit var listAdapter: RecipesAdapter
+
     private lateinit var viewDataBinding: FragmentRecipesBinding
 
     override fun onCreateView(
@@ -32,6 +35,7 @@ class RecipesFragment : DaggerFragment() {
         viewDataBinding = FragmentRecipesBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipesFragment.viewModel
             lifecycleOwner = this@RecipesFragment.viewLifecycleOwner
+            recipeList.adapter = this@RecipesFragment.listAdapter
         }
         return viewDataBinding.root
     }
@@ -40,7 +44,6 @@ class RecipesFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         setupNavigation()
-        setupListAdapter()
     }
 
     private fun setupNavigation() {
@@ -62,10 +65,4 @@ class RecipesFragment : DaggerFragment() {
         val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragment()
         findNavController().navigate(action)
     }
-
-    private fun setupListAdapter() {
-        val listAdapter = RecipesAdapter(viewModel)
-        viewDataBinding.recipeList.adapter = listAdapter
-    }
-
 }

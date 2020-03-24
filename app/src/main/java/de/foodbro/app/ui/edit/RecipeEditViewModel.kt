@@ -2,17 +2,16 @@ package de.foodbro.app.ui.edit
 
 import androidx.lifecycle.*
 import de.foodbro.app.model.Ingredient
+import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.repository.IngredientRepository
-import de.foodbro.app.repository.RecipeRepository
+import de.foodbro.app.repository.RecipeDetailRepository
 import de.foodbro.app.ui.Event
 import de.foodbro.app.util.IntArg
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RecipeEditViewModel @Inject constructor(
-    private val recipeRepository: RecipeRepository,
-    private val ingredientRepository: IngredientRepository) : ViewModel() {
+    private val recipeDetailRepository: RecipeDetailRepository) : ViewModel() {
 
     private val _recipeId = MutableLiveData<Int>()
 
@@ -21,9 +20,10 @@ class RecipeEditViewModel @Inject constructor(
     val portions = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Int>()
     val preparationTime = MutableLiveData<Int>()
-    val preparationSteps = MutableLiveData<List<String>>()
 
     val ingredients = MutableLiveData<List<Ingredient>>()
+
+    val preparationSteps = MutableLiveData<List<PreparationStep>>()
 
     private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
     val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
@@ -36,10 +36,11 @@ class RecipeEditViewModel @Inject constructor(
         _recipeId.value = recipeId.arg
         loadRecipe(recipeId.arg)
         loadIngredients(recipeId.arg)
+        loadPreparationSteps(recipeId.arg)
     }
 
     private fun loadRecipe(recipeId: Int) = viewModelScope.launch {
-        recipeRepository.getById(recipeId).let {
+        recipeDetailRepository.getRecipeById(recipeId).let {
             if (it == null) {
                 TODO("error message")
             } else {
@@ -49,8 +50,14 @@ class RecipeEditViewModel @Inject constructor(
     }
 
     private fun loadIngredients(recipeId: Int) = viewModelScope.launch {
-        ingredientRepository.getByRecipeId(recipeId).let {
+        recipeDetailRepository.getIngredientsByRecipeId(recipeId).let {
             ingredients.value = it
+        }
+    }
+
+    private fun loadPreparationSteps(recipeId: Int) = viewModelScope.launch {
+        recipeDetailRepository.getPreparationStepsByRecipeId(recipeId).let {
+            preparationSteps.value = it
         }
     }
 
@@ -60,31 +67,43 @@ class RecipeEditViewModel @Inject constructor(
         portions.value = recipe.portions
         difficulty.value = recipe.difficulty
         preparationTime.value = recipe.preparationTime
-        preparationSteps.value = recipe.preparationSteps
     }
 
-    fun saveRecipe() {
+    fun save() {
+        saveRecipe()
+        saveIngredients()
+        savePreparationSteps()
+    }
+
+    private fun saveRecipe() {
         val currentId = _recipeId.value
         val currentName = name.value
         val currentDescription = description.value.orEmpty()
         val currentDifficulty = difficulty.value
         val currentPortions = portions.value
         val currentPreparationTime = preparationTime.value
-        val currentPreparationSteps = preparationSteps.value.orEmpty()
 
         if (currentName.isNullOrBlank()) {
             TODO("error message")
         }
 
         if (currentId == null) {
-            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime, currentPreparationSteps))
+            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime))
         } else {
-            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime, currentPreparationSteps, currentId))
+            insertRecipe(Recipe(currentName, currentDescription, currentPortions, currentDifficulty, currentPreparationTime, currentId))
         }
     }
 
     private fun insertRecipe(recipe: Recipe) = viewModelScope.launch {
-        recipeRepository.insert(recipe)
+        recipeDetailRepository.insert(recipe)
         _recipeUpdatedEvent.value = Event(Unit)
+    }
+
+    private fun saveIngredients() = viewModelScope.launch {
+        recipeDetailRepository.insertIngredients(_recipeId.value!!, ingredients.value.orEmpty())
+    }
+
+    private fun savePreparationSteps() = viewModelScope.launch {
+        recipeDetailRepository.insertPreparation(_recipeId.value!!, preparationSteps.value.orEmpty())
     }
 }

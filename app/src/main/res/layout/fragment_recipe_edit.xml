@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
@@ -24,6 +23,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Summary"
+                    android:textSize="24sp"
+                    android:textAlignment="center"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -113,13 +124,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="8dp" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingredients"
+                    android:textSize="24sp"
+                    android:textAlignment="center"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ingredients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:items="@{viewModel.ingredients}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_edit_ingredient" />
+                    tools:listitem="@layout/list_item_edit_ingredient"
+                    tools:itemCount="3" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Preparation"
+                    android:textSize="24sp"
+                    android:textAlignment="center"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/preparations_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:items="@{viewModel.preparationSteps}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item_edit_preparation"
+                    tools:itemCount="2"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -128,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> viewModel.saveRecipe()}"
+            android:onClick="@{() -> viewModel.save()}"
             app:fabSize="normal"
             app:layout_anchor="@id/edit_content"
             app:layout_anchorGravity="bottom|right|end"

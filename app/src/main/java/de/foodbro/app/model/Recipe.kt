@@ -1,6 +1,7 @@
 package de.foodbro.app.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import de.foodbro.app.database.converter.StringListConverter
@@ -17,9 +18,6 @@ data class Recipe @JvmOverloads constructor(
     var difficulty: Int? = null,
 
     var preparationTime: Int? = null,
-
-    @TypeConverters(StringListConverter::class)
-    var preparationSteps: List<String> = emptyList(),
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

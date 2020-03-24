@@ -2,6 +2,7 @@ package de.foodbro.app.util
 
 import androidx.recyclerview.widget.DiffUtil
 import de.foodbro.app.model.Ingredient
+import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.model.Recipe
 
 class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
@@ -24,12 +25,12 @@ class IngredientDiffCallback : DiffUtil.ItemCallback<Ingredient>() {
     }
 }
 
-class StringDiffCallback : DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-        return areContentsTheSame(oldItem, newItem)
+class PreparationDiffCallback : DiffUtil.ItemCallback<PreparationStep>() {
+    override fun areItemsTheSame(oldItem: PreparationStep, newItem: PreparationStep): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+    override fun areContentsTheSame(oldItem: PreparationStep, newItem: PreparationStep): Boolean {
         return oldItem == newItem
     }
 }

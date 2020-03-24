@@ -8,7 +8,10 @@ import de.foodbro.app.ui.adapter.AbstractIngredientsAdapter
 
 class IngredientsAdapter : AbstractIngredientsAdapter<ListItemDetailIngredientBinding>() {
 
-    override fun getViewDataBinding(layoutInflater: LayoutInflater, parent: ViewGroup): ListItemDetailIngredientBinding {
+    override fun getViewDataBinding(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
+    ): ListItemDetailIngredientBinding {
         return ListItemDetailIngredientBinding.inflate(layoutInflater, parent, false)
     }
 
@@ -20,9 +23,8 @@ class IngredientsAdapter : AbstractIngredientsAdapter<ListItemDetailIngredientBi
     inner class ViewHolder(binding: ListItemDetailIngredientBinding) :
         AbstractIngredientsAdapter.ViewHolder<ListItemDetailIngredientBinding>(binding) {
 
-        override fun bind(ingredient: Ingredient) {
-            binding.ingredient = ingredient
-            binding.executePendingBindings()
+        override fun bind(item: Ingredient) {
+            binding.ingredient = item
         }
     }
 }

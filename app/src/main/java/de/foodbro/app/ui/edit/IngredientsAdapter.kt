@@ -8,6 +8,7 @@ import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemEditIngredientBinding
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Units
+import de.foodbro.app.ui.adapter.AbstractAdapter
 import de.foodbro.app.ui.adapter.AbstractIngredientsAdapter
 import javax.inject.Inject
 
@@ -20,21 +21,20 @@ class IngredientsAdapter @Inject constructor(
     }
 
     override fun getViewHolder(binding: ListItemEditIngredientBinding):
-            AbstractIngredientsAdapter.ViewHolder<ListItemEditIngredientBinding> {
+            AbstractAdapter.ViewHolder<ListItemEditIngredientBinding, Ingredient> {
         return ViewHolder(binding)
     }
 
     inner class ViewHolder(binding: ListItemEditIngredientBinding) :
-        AbstractIngredientsAdapter.ViewHolder<ListItemEditIngredientBinding>(binding) {
+        AbstractAdapter.ViewHolder<ListItemEditIngredientBinding, Ingredient>(binding) {
 
-        override fun bind(ingredient: Ingredient) {
-            binding.ingredient = ingredient
+        override fun bind(item: Ingredient) {
+            binding.ingredient = item
             setupUnitDropdown()
-            binding.executePendingBindings()
         }
 
         private fun setupUnitDropdown() {
-            val adapter = ArrayAdapter(context, R.layout.list_item_edit_ingredient_units, Units.values())
+            val adapter = UnitsAdapter(context, R.layout.list_item_edit_ingredient_units, Units.values())
             binding.unitDropdown.setAdapter(adapter)
         }
     }

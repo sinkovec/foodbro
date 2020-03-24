@@ -1,6 +1,7 @@
 package de.foodbro.app.di
 
 import android.app.Application
+import android.util.Log
 import androidx.room.OnConflictStrategy
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -23,6 +24,7 @@ class RoomModule {
 
                     db.delete("recipe_table", "", emptyArray())
                     db.delete("ingredient_table", "", emptyArray())
+                    db.delete("preparations_table", "", emptyArray())
 
                     db.insert("recipe_table", OnConflictStrategy.REPLACE, chiliConCarneContentValues())
                     db.insert("recipe_table", OnConflictStrategy.REPLACE, chiliConCarneContentValues())
@@ -39,6 +41,18 @@ class RoomModule {
                     chiliConCarneIngredientsContentValues(3).forEach {
                         db.insert("ingredient_table", OnConflictStrategy.REPLACE, it)
                     }
+
+                    chiliConCarnePreparationContentValues(1).forEach {
+                        db.insert("preparations_table", OnConflictStrategy.REPLACE, it)
+                    }
+
+                    chiliConCarnePreparationContentValues(2).forEach {
+                        db.insert("preparations_table", OnConflictStrategy.REPLACE, it)
+                    }
+
+                    chiliConCarnePreparationContentValues(3).forEach {
+                        db.insert("preparations_table", OnConflictStrategy.REPLACE, it)
+                    }
                 }
             })
             .fallbackToDestructiveMigration()
@@ -47,14 +61,14 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun providesRecipeDao(appDatabase: AppDatabase): RecipeDao {
-        return appDatabase.recipeDao()
-    }
+    fun provideRecipeDao(appDatabase: AppDatabase): RecipeDao = appDatabase.recipeDao()
 
     @Singleton
     @Provides
-    fun providesIngredientDao(appDatabase: AppDatabase): IngredientDao {
-        return appDatabase.ingredientDao()
-    }
+    fun provideIngredientDao(appDatabase: AppDatabase): IngredientDao = appDatabase.ingredientDao()
+
+    @Singleton
+    @Provides
+    fun providePreparationDao(appDatabase: AppDatabase): PreparationDao = appDatabase.preparationDao()
 
 }

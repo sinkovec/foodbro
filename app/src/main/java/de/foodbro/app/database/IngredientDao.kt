@@ -15,17 +15,17 @@ interface IngredientDao {
     suspend fun getByRecipeId(id: Int): List<Ingredient>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(ingredients: List<Ingredient>)
+    suspend fun insertAll(ingredients: List<Ingredient>)
 
-    fun insertAllForRecipe(recipe: Recipe, ingredients: List<Ingredient>) {
+    suspend fun insertAllForRecipe(recipeId: Int, ingredients: List<Ingredient>) {
         ingredients.forEach {
-            it.recipeId = recipe.id
+            it.recipeId = recipeId
         }
         insertAll(ingredients)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(ingredient: Ingredient)
+    suspend fun insert(ingredient: Ingredient)
 
     @Query("DELETE FROM ingredient_table")
     fun deleteAll()

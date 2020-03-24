@@ -44,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:inputType="none"
                 android:editable="false"
+                android:text="@={ingredient.unit}"
                 android:singleLine="true"
                 android:ellipsize="end"
                 tools:ignore="LabelFor" />
