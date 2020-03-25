@@ -5,5 +5,5 @@ import de.foodbro.app.model.Ingredient
 import de.foodbro.app.util.IngredientDiffCallback
 
 abstract class AbstractIngredientsAdapter<T : ViewDataBinding> : AbstractAdapter<T, Ingredient>(IngredientDiffCallback()) {
-    abstract class ViewHolder<T : ViewDataBinding>(binding: T) : AbstractAdapter.ViewHolder<T, Ingredient>(binding)
+    abstract class ViewHolder<T : ViewDataBinding>(binding: T) : AbstractAdapter.ViewHolder<T,Ingredient>(binding)
 }

@@ -9,8 +9,8 @@ data class Label(
 
     // var color
 
-    var recipeId: Int = 0,
+    var recipeId: Long = 0,
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Long = 0
 )

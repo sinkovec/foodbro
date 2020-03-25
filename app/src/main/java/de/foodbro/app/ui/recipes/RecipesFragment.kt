@@ -1,30 +1,21 @@
 package de.foodbro.app.ui.recipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 
-import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipesBinding
 import de.foodbro.app.ui.EventObserver
-import de.foodbro.app.util.IntArg
-import kotlinx.android.synthetic.main.fragment_recipes.*
+import de.foodbro.app.util.LongArg
 import javax.inject.Inject
 
 class RecipesFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModel: RecipesViewModel
-
-    @Inject
-    lateinit var listAdapter: RecipesAdapter
 
     private lateinit var viewDataBinding: FragmentRecipesBinding
 
@@ -35,7 +26,7 @@ class RecipesFragment : DaggerFragment() {
         viewDataBinding = FragmentRecipesBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipesFragment.viewModel
             lifecycleOwner = this@RecipesFragment.viewLifecycleOwner
-            recipeList.adapter = this@RecipesFragment.listAdapter
+            recipeList.adapter = RecipesAdapter(this@RecipesFragment.viewModel)
         }
         return viewDataBinding.root
     }
@@ -55,14 +46,14 @@ class RecipesFragment : DaggerFragment() {
         })
     }
 
-    private fun openRecipeDetails(recipeId: Int) {
+    private fun openRecipeDetails(recipeId: Long) {
         val action =
-            RecipesFragmentDirections.actionRecipesFragmentDestToRecipeDetailFragment(IntArg(recipeId))
+            RecipesFragmentDirections.actionRecipesFragmentDestToRecipeDetailFragment(LongArg(recipeId))
         findNavController().navigate(action)
     }
 
     private fun openNewRecipe() {
-        val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragment()
+        val action = RecipesFragmentDirections.actionRecipesFragmentDestToEditGraph()
         findNavController().navigate(action)
     }
 }

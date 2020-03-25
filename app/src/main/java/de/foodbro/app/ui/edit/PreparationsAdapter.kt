@@ -11,14 +11,12 @@ class PreparationsAdapter : AbstractPreparationAdapter<ListItemEditPreparationBi
     override fun getViewDataBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup
-    ): ListItemEditPreparationBinding {
-        return ListItemEditPreparationBinding.inflate(layoutInflater, parent, false)
-    }
+    ): ListItemEditPreparationBinding =
+        ListItemEditPreparationBinding.inflate(layoutInflater, parent, false)
 
     override fun getViewHolder(binding: ListItemEditPreparationBinding):
-            AbstractPreparationAdapter.ViewHolder<ListItemEditPreparationBinding> {
-        return ViewHolder(binding)
-    }
+            AbstractPreparationAdapter.ViewHolder<ListItemEditPreparationBinding> =
+        ViewHolder(binding)
 
     inner class ViewHolder(binding: ListItemEditPreparationBinding) :
         AbstractPreparationAdapter.ViewHolder<ListItemEditPreparationBinding>(binding) {

@@ -11,13 +11,13 @@ interface RecipeDao {
     fun observeAll(): LiveData<List<Recipe>>
 
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    fun observeById(id: Int): LiveData<Recipe>
+    fun observeById(id: Long): LiveData<Recipe>
 
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    suspend fun getById(id: Int): Recipe?
+    suspend fun getById(id: Long): Recipe?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(recipe: Recipe)
+    suspend fun insert(recipe: Recipe): Long
 
     @Delete
     fun delete(recipe: Recipe)

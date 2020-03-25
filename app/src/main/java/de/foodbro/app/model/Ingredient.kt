@@ -14,10 +14,10 @@ data class Ingredient(
     @TypeConverters(UnitConverter::class)
     var unit: Units? = null,
 
-    var recipeId: Int = 0,
+    var recipeId: Long = 0,
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Long = 0
 ) {
     override fun toString() = listOfNotNull(quantity, unit, name).joinToString(" ")
 }

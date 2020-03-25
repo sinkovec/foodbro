@@ -1,31 +1,36 @@
 package de.foodbro.app.ui.edit
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
-import de.foodbro.app.R
+import de.foodbro.app.EditGraphArgs
 
+import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
+import kotlinx.android.synthetic.main.fragment_recipe_edit.*
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class RecipeEditFragment : DaggerFragment() {
 
-    private val args: RecipeEditFragmentArgs by navArgs()
+    companion object {
+        private val TAB_TITLES = listOf("Summary", "Ingredients", "Preparation")
+    }
+
+    private val args: EditGraphArgs by navArgs()
+
+    private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
     @Inject
     lateinit var viewModel: RecipeEditViewModel
-
-    @Inject
-    lateinit var ingredientsAdapter: IngredientsAdapter
-
-    private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,39 +39,41 @@ class RecipeEditFragment : DaggerFragment() {
         viewDataBinding = FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeEditFragment.viewModel
             lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
-            ingredientsList.adapter = this@RecipeEditFragment.ingredientsAdapter
-            preparationsList.adapter = PreparationsAdapter()
         }
         viewModel.setup(args.recipeId)
         return viewDataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupNavigation()
-        setupIngredientsList()
+        setupViewPager()
     }
 
     private fun setupNavigation() {
         viewModel.recipeUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
-            val action =
-                RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipesFragmentDest()
+            val action = RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipesFragmentDest()
             findNavController().navigate(action)
         })
     }
 
-    private fun setupIngredientsList() {
-        // set spacing between items
-        val space = resources.getDimensionPixelSize(R.dimen.list_item_spacing)
-        viewDataBinding.ingredientsList.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(
-                outRect: Rect, view: View,
-                parent: RecyclerView, state: RecyclerView.State
-            ) {
-                outRect.bottom = space
-            }
-        })
+    private fun setupViewPager() {
+        val viewPagerAdapter = createViewPagerAdapter()
+        edit_view_pager.adapter = viewPagerAdapter
+
+        TabLayoutMediator(edit_tab_layout, edit_view_pager) { tab, position ->
+            tab.text = TAB_TITLES[position]
+        }.attach()
+    }
+
+    private fun createViewPagerAdapter() = object : FragmentStateAdapter(this) {
+        override fun getItemCount(): Int = 3
+
+        override fun createFragment(position: Int): Fragment = when(position) {
+            0 -> RecipeEditSummaryFragment()
+            1 -> RecipeEditIngredientFragment()
+            2 -> RecipeEditPreparationFragment()
+            else -> throw IllegalArgumentException()
+        }
     }
 
 }

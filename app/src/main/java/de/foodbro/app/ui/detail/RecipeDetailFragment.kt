@@ -9,7 +9,6 @@ import androidx.navigation.fragment.navArgs
 import dagger.android.support.DaggerFragment
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
 import de.foodbro.app.ui.EventObserver
-import de.foodbro.app.util.IntArg
 
 import javax.inject.Inject
 
@@ -45,7 +44,7 @@ class RecipeDetailFragment : DaggerFragment() {
     private fun setupNavigation() {
         viewModel.editRecipeEvent.observe(viewLifecycleOwner, EventObserver {
             val action =
-                RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToRecipeEditFragment(
+                RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToEditGraph(
                     args.recipeId
                 )
             findNavController().navigate(action)

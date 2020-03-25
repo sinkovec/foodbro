@@ -8,6 +8,9 @@ import dagger.android.ContributesAndroidInjector
 import de.foodbro.app.App
 import de.foodbro.app.ui.detail.RecipeDetailFragment
 import de.foodbro.app.ui.edit.RecipeEditFragment
+import de.foodbro.app.ui.edit.RecipeEditIngredientFragment
+import de.foodbro.app.ui.edit.RecipeEditPreparationFragment
+import de.foodbro.app.ui.edit.RecipeEditSummaryFragment
 import de.foodbro.app.ui.recipes.RecipesFragment
 
 
@@ -28,4 +31,13 @@ interface AppModule {
 
     @ContributesAndroidInjector
     fun recipeEditFragment(): RecipeEditFragment
+
+    @ContributesAndroidInjector
+    fun recipeEditSummaryFragment(): RecipeEditSummaryFragment
+
+    @ContributesAndroidInjector
+    fun recipeEditIngredientFragment(): RecipeEditIngredientFragment
+
+    @ContributesAndroidInjector
+    fun recipeEditPreparationFragment(): RecipeEditPreparationFragment
 }

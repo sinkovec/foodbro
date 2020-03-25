@@ -13,7 +13,7 @@ import de.foodbro.app.model.Recipe
 import de.foodbro.app.util.RecipeDiffCallback
 import javax.inject.Inject
 
-class RecipesAdapter @Inject constructor(
+class RecipesAdapter constructor(
     private val viewModel: RecipesViewModel
 ) : ListAdapter<Recipe, RecipesAdapter.ViewHolder>(RecipeDiffCallback()) {
 

@@ -8,29 +8,26 @@ import de.foodbro.app.model.PreparationStep
 interface PreparationDao {
 
     @Query("SELECT * FROM preparations_table WHERE recipeId = :id")
-    fun observeByRecipeId(id: Int): LiveData<List<PreparationStep>>
+    fun observeByRecipeId(id: Long): LiveData<List<PreparationStep>>
 
     @Query("SELECT * FROM preparations_table WHERE recipeId = :id")
-    suspend fun getByRecipeId(id: Int): List<PreparationStep>
+    suspend fun getByRecipeId(id: Long): List<PreparationStep>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(ingredients: List<PreparationStep>)
+    suspend fun insert(vararg preparationStep: PreparationStep)
 
-    suspend fun insertAllForRecipe(recipeId: Int, preparationSteps: List<PreparationStep>) {
-        preparationSteps.forEach {
+    suspend fun insertByRecipeId(recipeId: Long, preparationSteps: List<PreparationStep>) {
+        preparationSteps.map {
             it.recipeId = recipeId
         }
-        insertAll(preparationSteps)
+        insert(*preparationSteps.toTypedArray())
     }
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(ingredient: PreparationStep)
 
     @Query("DELETE FROM preparations_table")
     fun deleteAll()
 
     @Query("DELETE FROM preparations_table WHERE recipeId = :id")
-    fun deleteAllByRecipeId(id: Int)
+    fun deleteAllByRecipeId(id: Long)
 
     @Delete
     fun delete(ingredient: PreparationStep)

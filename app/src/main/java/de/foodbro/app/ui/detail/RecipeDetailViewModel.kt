@@ -3,15 +3,14 @@ package de.foodbro.app.ui.detail
 import androidx.lifecycle.*
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.repository.RecipeDetailRepository
-import de.foodbro.app.repository.RecipesRepository
 import de.foodbro.app.ui.Event
-import de.foodbro.app.util.IntArg
+import de.foodbro.app.util.LongArg
 import javax.inject.Inject
 
 class RecipeDetailViewModel @Inject constructor(
     private val recipeDetailRepository: RecipeDetailRepository) : ViewModel() {
 
-    private val _recipeId = MutableLiveData<Int>()
+    private val _recipeId = MutableLiveData<Long>()
 
     val recipe: LiveData<Recipe> = _recipeId.switchMap {
         recipeDetailRepository.observeRecipeById(it)
@@ -28,7 +27,7 @@ class RecipeDetailViewModel @Inject constructor(
     private val _editRecipeEvent = MutableLiveData<Event<Unit>>()
     val editRecipeEvent: LiveData<Event<Unit>> = _editRecipeEvent
 
-    fun setup(recipeId: IntArg) {
+    fun setup(recipeId: LongArg) {
         _recipeId.value = recipeId.arg
     }
 

@@ -20,5 +20,5 @@ data class Recipe @JvmOverloads constructor(
     var preparationTime: Int? = null,
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Long = 0
 )

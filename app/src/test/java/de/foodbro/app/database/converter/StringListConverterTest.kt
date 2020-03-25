@@ -1,7 +1,7 @@
 package de.foodbro.app.database.converter
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class StringListConverterTest {
 

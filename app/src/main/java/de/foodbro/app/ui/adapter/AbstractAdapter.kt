@@ -25,6 +25,11 @@ abstract class AbstractAdapter<T : ViewDataBinding, S>(diffCallback: DiffUtil.It
         holder.bindItem(item)
     }
 
+    override fun submitList(list: List<S>?) {
+        super.submitList(list)
+        notifyDataSetChanged()
+    }
+
     abstract class ViewHolder<T : ViewDataBinding, S>(protected val binding: T) :
         RecyclerView.ViewHolder(binding.root) {
 

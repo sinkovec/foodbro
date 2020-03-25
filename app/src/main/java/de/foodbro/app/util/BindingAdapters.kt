@@ -3,6 +3,8 @@ package de.foodbro.app.util
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.PreparationStep

@@ -7,17 +7,18 @@ import de.foodbro.app.ui.Event
 import javax.inject.Inject
 
 class RecipesViewModel @Inject constructor(
-    recipeRepository: RecipesRepository) : ViewModel() {
+    recipeRepository: RecipesRepository
+) : ViewModel() {
 
     val recipes: LiveData<List<Recipe>> = recipeRepository.observeAll()
 
-    private val _openRecipeEvent = MutableLiveData<Event<Int>>()
-    val openRecipeEvent: LiveData<Event<Int>> = _openRecipeEvent
+    private val _openRecipeEvent = MutableLiveData<Event<Long>>()
+    val openRecipeEvent: LiveData<Event<Long>> = _openRecipeEvent
 
     private val _newRecipeEvent = MutableLiveData<Event<Unit>>()
     val newRecipeEvent: LiveData<Event<Unit>> = _newRecipeEvent
 
-    fun openRecipe(recipeId: Int) {
+    fun openRecipe(recipeId: Long) {
         _openRecipeEvent.value = Event(recipeId)
     }
 
