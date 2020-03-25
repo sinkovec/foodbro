@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 class RecipeEditPreparationFragment : DaggerFragment() {
 
-    @Inject
     lateinit var viewModel: RecipeEditViewModel
 
     private lateinit var viewDataBinding: FragmentRecipeEditPreparationBinding
@@ -33,7 +32,6 @@ class RecipeEditPreparationFragment : DaggerFragment() {
         viewDataBinding.preparationsList.adapter = listAdapter
         viewModel.preparationSteps.observe(viewLifecycleOwner, Observer {
             listAdapter.submitList(it)
-            listAdapter.notifyDataSetChanged()
         })
     }
 }

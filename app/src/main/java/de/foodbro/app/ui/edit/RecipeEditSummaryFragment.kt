@@ -4,18 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import dagger.android.support.DaggerFragment
-import de.foodbro.app.EditGraphArgs
 
 import de.foodbro.app.databinding.FragmentRecipeEditSummaryBinding
-import de.foodbro.app.ui.EventObserver
 import javax.inject.Inject
 
 class RecipeEditSummaryFragment : DaggerFragment() {
 
-    @Inject
     lateinit var viewModel: RecipeEditViewModel
 
     @Inject

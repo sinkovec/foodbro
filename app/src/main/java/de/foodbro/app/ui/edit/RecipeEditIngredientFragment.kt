@@ -1,6 +1,7 @@
 package de.foodbro.app.ui.edit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import javax.inject.Inject
 
 class RecipeEditIngredientFragment : DaggerFragment() {
 
-    @Inject
     lateinit var viewModel: RecipeEditViewModel
 
     @Inject

@@ -10,9 +10,7 @@ import de.foodbro.app.util.LongArg
 import de.foodbro.app.util.notifyObserver
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class RecipeEditViewModel @Inject constructor(
     private val recipeDetailRepository: RecipeDetailRepository
 ) : ViewModel() {
@@ -25,25 +23,16 @@ class RecipeEditViewModel @Inject constructor(
     val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
 
     fun setup(recipeId: LongArg?) {
-        // clear any previous data
-        clearData()
-
         if (recipeId == null) {
             recipe.value = Recipe()
+            ingredients.value = mutableListOf()
+            preparationSteps.value = mutableListOf()
         } else {
             val id = recipeId.arg
             loadRecipe(id)
             loadIngredients(id)
             loadPreparationSteps(id)
         }
-    }
-
-    private fun clearData() {
-        recipe.value = null
-        ingredients.value = mutableListOf()
-        preparationSteps.value = mutableListOf()
-
-        _recipeUpdatedEvent.value = null
     }
 
     private fun loadRecipe(recipeId: Long) = viewModelScope.launch {

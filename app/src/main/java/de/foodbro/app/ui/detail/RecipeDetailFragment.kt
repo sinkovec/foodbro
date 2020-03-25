@@ -44,7 +44,7 @@ class RecipeDetailFragment : DaggerFragment() {
     private fun setupNavigation() {
         viewModel.editRecipeEvent.observe(viewLifecycleOwner, EventObserver {
             val action =
-                RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToEditGraph(
+                RecipeDetailFragmentDirections.actionRecipeDetailFragmentDestToRecipeEditFragmentDest(
                     args.recipeId
                 )
             findNavController().navigate(action)

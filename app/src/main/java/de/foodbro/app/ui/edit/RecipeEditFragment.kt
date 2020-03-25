@@ -10,9 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
-import de.foodbro.app.EditGraphArgs
 
-import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
 import kotlinx.android.synthetic.main.fragment_recipe_edit.*
@@ -25,7 +23,7 @@ class RecipeEditFragment : DaggerFragment() {
         private val TAB_TITLES = listOf("Summary", "Ingredients", "Preparation")
     }
 
-    private val args: EditGraphArgs by navArgs()
+    private val args: RecipeEditFragmentArgs by navArgs()
 
     private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
@@ -44,7 +42,9 @@ class RecipeEditFragment : DaggerFragment() {
         return viewDataBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         setupNavigation()
         setupViewPager()
     }
@@ -57,21 +57,20 @@ class RecipeEditFragment : DaggerFragment() {
     }
 
     private fun setupViewPager() {
-        val viewPagerAdapter = createViewPagerAdapter()
-        edit_view_pager.adapter = viewPagerAdapter
+        edit_view_pager.adapter = getViewPagerAdapter()
 
         TabLayoutMediator(edit_tab_layout, edit_view_pager) { tab, position ->
             tab.text = TAB_TITLES[position]
         }.attach()
     }
 
-    private fun createViewPagerAdapter() = object : FragmentStateAdapter(this) {
+    private fun getViewPagerAdapter() = object : FragmentStateAdapter(this) {
         override fun getItemCount(): Int = 3
 
         override fun createFragment(position: Int): Fragment = when(position) {
-            0 -> RecipeEditSummaryFragment()
-            1 -> RecipeEditIngredientFragment()
-            2 -> RecipeEditPreparationFragment()
+            0 -> RecipeEditSummaryFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
+            1 -> RecipeEditIngredientFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
+            2 -> RecipeEditPreparationFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
             else -> throw IllegalArgumentException()
         }
     }

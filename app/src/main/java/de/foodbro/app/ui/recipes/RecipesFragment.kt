@@ -53,7 +53,7 @@ class RecipesFragment : DaggerFragment() {
     }
 
     private fun openNewRecipe() {
-        val action = RecipesFragmentDirections.actionRecipesFragmentDestToEditGraph()
+        val action = RecipesFragmentDirections.actionRecipesFragmentDestToRecipeEditFragmentDest()
         findNavController().navigate(action)
     }
 }
