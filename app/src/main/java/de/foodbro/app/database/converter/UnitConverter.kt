@@ -6,8 +6,8 @@ import de.foodbro.app.model.Units
 class UnitConverter {
 
     @TypeConverter
-    fun toUnit(value: Int?): Units? = value?.let { enumValues<Units>()[value] }
+    fun toUnit(value: Long?): Units? = value?.let { enumValues<Units>()[it.toInt()] }
 
     @TypeConverter
-    fun toInt(unit: Units?): Int? = unit?.id
+    fun toLong(unit: Units?): Long? = unit?.id
 }

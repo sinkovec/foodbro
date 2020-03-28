@@ -19,5 +19,7 @@ data class Ingredient(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 ) {
+    fun printQuantityAndUnit() = listOfNotNull(quantity, unit).joinToString(" ")
+
     override fun toString() = listOfNotNull(quantity, unit, name).joinToString(" ")
 }

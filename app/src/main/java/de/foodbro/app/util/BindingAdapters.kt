@@ -1,6 +1,9 @@
 package de.foodbro.app.util
 
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.lifecycle.LiveData
@@ -54,15 +57,29 @@ fun getInt(view: EditText): Int? {
 }
 
 @BindingAdapter("android:text")
-fun setUnit(view: EditText, value: Units?) {
+fun setUnit(view: TextView, value: Units?) {
     value?.let {
         if (view.text.toString() != it.toString()) {
-            view.setText(it.toString())
+            view.text = it.toString()
         }
     }
 }
 
-@InverseBindingAdapter(attribute = "android:text")
-fun getUnit(view: EditText): Units? {
-    return Units.getValue(view.text.toString())
+@BindingAdapter("android:text")
+fun setUnit(view: ToggleButton, value: Units?) {
+    value?.let {
+        val str = it.toString()
+        view.apply {
+            text = str
+            textOff = str
+            textOn = str
+        }
+    }
+}
+
+@BindingAdapter("android:text")
+fun setUnit(view: Button, value: Units?) {
+    value?.let {
+        view.text = it.toString()
+    }
 }

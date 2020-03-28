@@ -4,4 +4,5 @@
     <dimen name="list_item_spacing">8dp</dimen>
 
     <dimen name="list_item_edit_ingredient_height">48dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
 </resources>

@@ -31,13 +31,4 @@ interface AppModule {
 
     @ContributesAndroidInjector
     fun recipeEditFragment(): RecipeEditFragment
-
-    @ContributesAndroidInjector
-    fun recipeEditSummaryFragment(): RecipeEditSummaryFragment
-
-    @ContributesAndroidInjector
-    fun recipeEditIngredientFragment(): RecipeEditIngredientFragment
-
-    @ContributesAndroidInjector
-    fun recipeEditPreparationFragment(): RecipeEditPreparationFragment
 }

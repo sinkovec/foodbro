@@ -52,7 +52,7 @@ class RecipeEditViewModelTest {
     @Test
     fun `test setup of ViewModel that name is set`() = runBlockingTest {
         // given
-        `when`(repository.getRecipeById(ArgumentMatchers.anyInt()))
+        `when`(repository.getRecipeById(ArgumentMatchers.anyLong()))
             .thenReturn(testRecipe)
 
         // when
@@ -67,9 +67,9 @@ class RecipeEditViewModelTest {
     @Test
     fun `test setup of ViewModel that ingredients are set`() = runBlockingTest {
         // given
-        `when`(repository.getRecipeById(ArgumentMatchers.anyInt()))
+        `when`(repository.getRecipeById(ArgumentMatchers.anyLong()))
             .thenReturn(testRecipe)
-        `when`(repository.getIngredientsByRecipeId(ArgumentMatchers.anyInt()))
+        `when`(repository.getIngredientsByRecipeId(ArgumentMatchers.anyLong()))
             .thenReturn(listOf(testIngredient))
 
         // when

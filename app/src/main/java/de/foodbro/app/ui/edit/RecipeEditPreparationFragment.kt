@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import dagger.android.support.DaggerFragment
 import de.foodbro.app.databinding.FragmentRecipeEditPreparationBinding
 import javax.inject.Inject
 
-class RecipeEditPreparationFragment : DaggerFragment() {
+class RecipeEditPreparationFragment : Fragment() {
 
     lateinit var viewModel: RecipeEditViewModel
 

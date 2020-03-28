@@ -1,22 +1,19 @@
 package de.foodbro.app.ui.edit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import dagger.android.support.DaggerFragment
 
 import de.foodbro.app.databinding.FragmentRecipeEditIngredientBinding
-import javax.inject.Inject
+import de.foodbro.app.ui.EventObserver
+import de.foodbro.app.ui.edit.unitsdialog.UnitsDialogFragment
 
-class RecipeEditIngredientFragment : DaggerFragment() {
+class RecipeEditIngredientFragment : Fragment() {
 
     lateinit var viewModel: RecipeEditViewModel
-
-    @Inject
-    lateinit var listAdapter: IngredientsAdapter
 
     private lateinit var viewDataBinding: FragmentRecipeEditIngredientBinding
 
@@ -32,9 +29,15 @@ class RecipeEditIngredientFragment : DaggerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val listAdapter = IngredientsAdapter(viewModel)
         viewDataBinding.ingredientsList.adapter = listAdapter
         viewModel.ingredients.observe(viewLifecycleOwner, Observer {
             listAdapter.submitList(it)
+        })
+
+        val unitsDialog = UnitsDialogFragment.newInstance(viewModel)
+        viewModel.openBottomSheetEvent.observe(viewLifecycleOwner, EventObserver {
+            unitsDialog.show(parentFragmentManager, "dialog")
         })
     }
 }

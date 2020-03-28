@@ -1,24 +1,15 @@
 package de.foodbro.app.ui.detail
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemDetailIngredientBinding
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.ui.adapter.AbstractIngredientsAdapter
 
 class IngredientsAdapter : AbstractIngredientsAdapter<ListItemDetailIngredientBinding>() {
 
-    override fun getViewDataBinding(
-        layoutInflater: LayoutInflater,
-        parent: ViewGroup
-    ): ListItemDetailIngredientBinding {
-        return ListItemDetailIngredientBinding.inflate(layoutInflater, parent, false)
-    }
+    override fun getLayout() = R.layout.list_item_detail_ingredient
 
-    override fun getViewHolder(binding: ListItemDetailIngredientBinding):
-            AbstractIngredientsAdapter.ViewHolder<ListItemDetailIngredientBinding> {
-        return ViewHolder(binding)
-    }
+    override fun getViewHolder(binding: ListItemDetailIngredientBinding) = ViewHolder(binding)
 
     inner class ViewHolder(binding: ListItemDetailIngredientBinding) :
         AbstractIngredientsAdapter.ViewHolder<ListItemDetailIngredientBinding>(binding) {

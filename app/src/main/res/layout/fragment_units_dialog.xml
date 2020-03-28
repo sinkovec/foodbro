@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="de.foodbro.app.model.Units" />
+        <variable
+            name="viewModel"
+            type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/content_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingHorizontal="4dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Quantity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:text="@={viewModel.selectedIngredient.quantity}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="Name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:text="@={viewModel.selectedIngredient.name}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_mg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.MILLIGRAM}"
+                android:onClick="@{() -> viewModel.check(Units.MILLIGRAM)}"
+                android:textSize="14sp"/>
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_g"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.GRAM}"
+                android:onClick="@{() -> viewModel.check(Units.GRAM)}"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_kg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.KILOGRAM}"
+                android:onClick="@{() -> viewModel.check(Units.KILOGRAM)}"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_t"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.TEASPOON}"
+                android:onClick="@{() -> viewModel.check(Units.TEASPOON)}"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_tbsp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.TABLESPOON}"
+                android:onClick="@{() -> viewModel.check(Units.TABLESPOON)}"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_ml"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.MILLILITRE}"
+                android:onClick="@{() -> viewModel.check(Units.MILLILITRE)}"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/units_dialog_toggle_btn_l"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{Units.LITRE}"
+                android:onClick="@{() -> viewModel.check(Units.LITRE)}"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

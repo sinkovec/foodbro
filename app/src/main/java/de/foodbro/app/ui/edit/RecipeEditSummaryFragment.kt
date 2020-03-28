@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import dagger.android.support.DaggerFragment
 
 import de.foodbro.app.databinding.FragmentRecipeEditSummaryBinding
 import javax.inject.Inject
 
-class RecipeEditSummaryFragment : DaggerFragment() {
+class RecipeEditSummaryFragment : Fragment() {
 
     lateinit var viewModel: RecipeEditViewModel
-
-    @Inject
-    lateinit var ingredientsAdapter: IngredientsAdapter
 
     private lateinit var viewDataBinding: FragmentRecipeEditSummaryBinding
 

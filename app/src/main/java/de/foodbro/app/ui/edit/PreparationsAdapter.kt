@@ -1,18 +1,13 @@
 package de.foodbro.app.ui.edit
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemEditPreparationBinding
 import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.ui.adapter.AbstractPreparationAdapter
 
 class PreparationsAdapter : AbstractPreparationAdapter<ListItemEditPreparationBinding>() {
 
-    override fun getViewDataBinding(
-        layoutInflater: LayoutInflater,
-        parent: ViewGroup
-    ): ListItemEditPreparationBinding =
-        ListItemEditPreparationBinding.inflate(layoutInflater, parent, false)
+    override fun getLayout() = R.layout.list_item_edit_preparation
 
     override fun getViewHolder(binding: ListItemEditPreparationBinding):
             AbstractPreparationAdapter.ViewHolder<ListItemEditPreparationBinding> =
