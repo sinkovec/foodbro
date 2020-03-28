@@ -69,7 +69,7 @@ fun chiliConCarnePreparation(): String {
         [
             {
                 "text": "Die Zwiebeln abziehen, in Würfel schneiden und in einem tiefen Topf oder Bräter im Öl goldgelb anbraten. Hackfleisch zufügen, gut anbraten und Farbe nehmen lassen. Dabei ab und zu umrühren und das Hackfleisch zerkleinern.",
-                "pos": 0
+                "pos": 1
             },
             {
                 "text": "Paprika putzen, in Würfel schneiden und zum Hackfleisch geben. Tomatenmark zufügen und etwas anrösten. Die Tomaten, den gepellten und zerkleinerten Knoblauch sowie Gewürze (Zucker, Salz, Pfeffer, Paprika, Tabasco, Chili oder Cayenne) zugeben. Allerdings lieber erst einmal etwas vorsichtiger würzen und gegebenenfalls nach der Kochzeit nachwürzen. Mit Brühe auffüllen und bei mittlerer Hitze einkochen lassen, ist die Flüssigkeit verkocht, immer wieder Brühe angießen.",

@@ -126,7 +126,8 @@ class RecipeEditViewModel @Inject constructor(
     }
 
     fun addPreparationStep() {
-        preparationSteps.value?.add(PreparationStep())
+        val pos = preparationSteps.value?.size?.plus(1) ?: TODO("error")
+        preparationSteps.value?.add(PreparationStep(pos=pos))
         preparationSteps.notifyObserver()
     }
 }

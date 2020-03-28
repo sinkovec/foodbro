@@ -1,4 +1,4 @@
-package de.foodbro.app.util
+package de.foodbro.app.util.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
 import de.foodbro.app.model.Ingredient

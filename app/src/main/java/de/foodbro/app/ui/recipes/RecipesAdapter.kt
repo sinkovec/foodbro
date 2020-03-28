@@ -1,17 +1,12 @@
 package de.foodbro.app.ui.recipes
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemRecipesBinding
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.util.RecipeDiffCallback
-import javax.inject.Inject
+import de.foodbro.app.util.callbacks.RecipeDiffCallback
 
 class RecipesAdapter constructor(
     private val viewModel: RecipesViewModel

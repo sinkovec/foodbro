@@ -13,4 +13,6 @@ data class PreparationStep @JvmOverloads constructor(
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-)
+) {
+    fun printPosition() = "$pos."
+}

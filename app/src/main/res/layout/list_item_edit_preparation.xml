@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="preparation"
             type="de.foodbro.app.model.PreparationStep" />
@@ -12,20 +14,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Preparation step">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{preparation.printPosition()}"
+                android:textSize="36sp"
+                tools:text="1." />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:text="@={preparation.text}" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Preparation step">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:text="@={preparation.text}" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/list_item_spacing" />
+            android:layout_height="8dp" />
     </LinearLayout>
 </layout>

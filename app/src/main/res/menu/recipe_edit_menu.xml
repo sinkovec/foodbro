@@ -6,5 +6,5 @@
         android:id="@+id/action_save_recipe"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Speichern" />
+        android:title="Save" />
 </menu>
