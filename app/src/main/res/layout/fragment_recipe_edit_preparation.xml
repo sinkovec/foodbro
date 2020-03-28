@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/content_horizontal_margin">
+            android:padding="@dimen/content_margin">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/preparations_list"

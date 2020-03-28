@@ -116,7 +116,12 @@ class RecipeEditViewModel @Inject constructor(
     fun isChecked(unit: Units) = _selectedIngredient.value?.unit?.equals(unit) ?: false
 
     fun check(unit: Units) {
-        _selectedIngredient.value?.unit = unit
+        val currentUnit = _selectedIngredient.value?.unit
+        if (currentUnit != null && currentUnit == unit) {
+            _selectedIngredient.value?.unit = null
+        } else {
+            _selectedIngredient.value?.unit = unit
+        }
         _selectedIngredient.notifyObserver()
     }
 

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
-
 import de.foodbro.app.databinding.FragmentRecipesBinding
 import de.foodbro.app.ui.EventObserver
 import de.foodbro.app.util.LongArg

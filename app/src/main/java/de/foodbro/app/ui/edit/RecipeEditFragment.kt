@@ -1,15 +1,14 @@
 package de.foodbro.app.ui.edit
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
+import de.foodbro.app.R
 
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
@@ -39,6 +38,9 @@ class RecipeEditFragment : DaggerFragment() {
             lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
         }
         viewModel.setup(args.recipeId)
+
+        setHasOptionsMenu(true)
+
         return viewDataBinding.root
     }
 
@@ -57,9 +59,10 @@ class RecipeEditFragment : DaggerFragment() {
     }
 
     private fun setupViewPager() {
+        edit_view_pager.offscreenPageLimit = TAB_TITLES.size
         edit_view_pager.adapter = getViewPagerAdapter()
 
-        TabLayoutMediator(edit_tab_layout, edit_view_pager) { tab, position ->
+        TabLayoutMediator(tab_layout, edit_view_pager) { tab, position ->
             tab.text = TAB_TITLES[position]
         }.attach()
     }
@@ -72,6 +75,20 @@ class RecipeEditFragment : DaggerFragment() {
             1 -> RecipeEditIngredientFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
             2 -> RecipeEditPreparationFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
             else -> throw IllegalArgumentException()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.recipe_edit_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_save_recipe -> {
+                viewModel.saveRecipe()
+                true
+            }
+            else -> false
         }
     }
 
