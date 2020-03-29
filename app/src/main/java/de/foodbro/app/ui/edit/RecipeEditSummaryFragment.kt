@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import dagger.android.support.DaggerFragment
 
 import de.foodbro.app.databinding.FragmentRecipeEditSummaryBinding
+import de.foodbro.app.ui.EventObserver
+import de.foodbro.app.ui.edit.dialogs.DurationPickerDialogFragment
 import javax.inject.Inject
 
 class RecipeEditSummaryFragment : Fragment() {
@@ -25,5 +27,11 @@ class RecipeEditSummaryFragment : Fragment() {
             lifecycleOwner = this@RecipeEditSummaryFragment.viewLifecycleOwner
         }
         return viewDataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.openTimePickerDialogEvent.observe(viewLifecycleOwner, EventObserver {
+            DurationPickerDialogFragment.newInstance(viewModel).show(parentFragmentManager, "dialog")
+        })
     }
 }

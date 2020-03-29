@@ -6,5 +6,5 @@
         android:id="@+id/action_save_recipe"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Save" />
+        android:title="@string/recipe_edit_save_recipe_action" />
 </menu>

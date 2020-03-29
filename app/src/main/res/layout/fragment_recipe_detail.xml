@@ -36,7 +36,8 @@
                         android:layout_marginBottom="5dp"
                         android:text="@{viewModel.recipe.name}"
                         android:textAlignment="center"
-                        android:textSize="36sp" />
+                        android:textSize="36sp"
+                        tools:text="Recipe Name"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -49,7 +50,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="@{viewModel.recipe.description}"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        tools:text="This is a description for this recipe"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/ingredients_list"
@@ -58,7 +60,8 @@
                         android:layout_margin="5dp"
                         android:items="@{viewModel.ingredients}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/list_item_detail_ingredient" />
+                        tools:listitem="@layout/list_item_detail_ingredient"
+                        tools:itemCount="3"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -73,7 +76,8 @@
                         android:layout_margin="5dp"
                         android:items="@{viewModel.preparationSteps}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/list_item_detail_preparation" />
+                        tools:listitem="@layout/list_item_detail_preparation"
+                        tools:itemCount="3"/>
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

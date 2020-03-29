@@ -3,6 +3,7 @@ package de.foodbro.app.database
 import android.content.ContentValues
 import androidx.core.content.contentValuesOf
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import de.foodbro.app.database.converter.IntPairConverter
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.model.Recipe
@@ -14,7 +15,7 @@ fun chiliConCarneContentValues(): ContentValues {
             Pair("description", it.description),
             Pair("portions", it.portions),
             Pair("difficulty", it.difficulty),
-            Pair("preparationTime", it.preparationTime))
+            Pair("preparationTime", chiliConCarnePreparationTime()))
     }.reduce(ContentValues()) { _,b -> b }
 }
 
@@ -58,10 +59,18 @@ fun chiliConCarne(): String {
             "name": "Chili Con Carne",
             "description": "Das ist eine Beschreibung für chili con carne",
             "portions": 4,
-            "difficulty": 1,
-            "preparationTime": 30
+            "difficulty": 1
         }
     """
+}
+
+fun chiliConCarnePreparationTime(): String {
+    return """
+        {
+            "first": 1,
+            "second": 30
+        }
+    """.trimIndent()
 }
 
 fun chiliConCarnePreparation(): String {

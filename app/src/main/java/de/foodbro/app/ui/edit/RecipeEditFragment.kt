@@ -19,7 +19,10 @@ import javax.inject.Inject
 class RecipeEditFragment : DaggerFragment() {
 
     companion object {
-        private val TAB_TITLES = listOf("Summary", "Ingredients", "Preparation")
+        private val TAB_TITLES = listOf(
+            R.string.recipe_edit_tab_summary,
+            R.string.recipe_edit_tab_ingredients,
+            R.string.recipe_edit_tab_preparation)
     }
 
     private val args: RecipeEditFragmentArgs by navArgs()
@@ -63,7 +66,7 @@ class RecipeEditFragment : DaggerFragment() {
         edit_view_pager.adapter = getViewPagerAdapter()
 
         TabLayoutMediator(tab_layout, edit_view_pager) { tab, position ->
-            tab.text = TAB_TITLES[position]
+            tab.text = getString(TAB_TITLES[position])
         }.attach()
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -16,7 +17,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name">
+            android:hint="@string/recipe_edit_summary_recipe_name_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <LinearLayout
@@ -35,10 +36,10 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Portions">
+                android:hint="@string/recipe_edit_summary_recipe_portions_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -49,30 +50,26 @@
 
             <Space
                 android:layout_width="8dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Preparation Time">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@={viewModel.recipe.preparationTime}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:text="@{viewModel.recipe.printPreparationTime()}"
+                android:onClick="@{() -> viewModel.openTimePickerDialog()}"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                tools:text="1 h 30 min"/>
 
             <Space
                 android:layout_width="8dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Difficulty">
+                android:hint="@string/recipe_edit_summary_recipe_difficulty_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -83,13 +80,13 @@
         </LinearLayout>
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description">
+            android:hint="@string/recipe_edit_summary_recipe_description_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

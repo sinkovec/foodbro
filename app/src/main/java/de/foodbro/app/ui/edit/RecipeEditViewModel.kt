@@ -20,12 +20,15 @@ class RecipeEditViewModel @Inject constructor(
     val ingredients = MutableLiveData<MutableList<Ingredient>>()
     val preparationSteps = MutableLiveData<MutableList<PreparationStep>>()
 
+    private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
+    val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
+
+    private val _openTimePickerDialogEvent = MutableLiveData<Event<Unit>>()
+    val openTimePickerDialogEvent: LiveData<Event<Unit>> = _openTimePickerDialogEvent
+
     private var isNewIngredient = true
     private val _selectedIngredient = MutableLiveData<Ingredient>()
     val selectedIngredient: LiveData<Ingredient> = _selectedIngredient
-
-    private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
-    val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
 
     private val _openBottomSheetEvent = MutableLiveData<Event<Unit>>()
     val openBottomSheetEvent: LiveData<Event<Unit>> = _openBottomSheetEvent
@@ -85,6 +88,15 @@ class RecipeEditViewModel @Inject constructor(
             TODO("error message")
         }
         return recipe.value!!
+    }
+
+    fun openTimePickerDialog() {
+        _openTimePickerDialogEvent.value = Event(Unit)
+    }
+
+    fun updatePreparationTime(hours: Int, minutes: Int) {
+        recipe.value?.preparationTime = Pair(hours, minutes)
+        recipe.notifyObserver()
     }
 
     fun addIngredient() {

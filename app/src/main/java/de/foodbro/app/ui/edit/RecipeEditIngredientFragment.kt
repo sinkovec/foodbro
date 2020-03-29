@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 
 import de.foodbro.app.databinding.FragmentRecipeEditIngredientBinding
 import de.foodbro.app.ui.EventObserver
-import de.foodbro.app.ui.edit.unitsdialog.UnitsDialogFragment
+import de.foodbro.app.ui.edit.dialogs.UnitsDialogFragment
 
 class RecipeEditIngredientFragment : Fragment() {
 
@@ -35,9 +35,8 @@ class RecipeEditIngredientFragment : Fragment() {
             listAdapter.submitList(it)
         })
 
-        val unitsDialog = UnitsDialogFragment.newInstance(viewModel)
         viewModel.openBottomSheetEvent.observe(viewLifecycleOwner, EventObserver {
-            unitsDialog.show(parentFragmentManager, "dialog")
+            UnitsDialogFragment.newInstance(viewModel).show(parentFragmentManager, "dialog")
         })
     }
 }

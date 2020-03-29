@@ -1,4 +1,4 @@
-package de.foodbro.app.ui.edit.unitsdialog
+package de.foodbro.app.ui.edit.dialogs
 
 import android.content.DialogInterface
 import android.os.Bundle
