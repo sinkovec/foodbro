@@ -23,7 +23,7 @@
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/content_margin">
+                android:layout_marginHorizontal="@dimen/content_margin">
 
                 <LinearLayout
                     android:layout_width="match_parent"
