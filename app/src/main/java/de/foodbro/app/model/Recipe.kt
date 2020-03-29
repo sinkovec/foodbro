@@ -1,11 +1,13 @@
 package de.foodbro.app.model
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import de.foodbro.app.database.converter.IntPairConverter
 import de.foodbro.app.database.converter.StringListConverter
+import de.foodbro.app.database.converter.UriConverter
 import java.util.*
 
 @Entity(tableName = "recipe_table")
@@ -13,6 +15,9 @@ data class Recipe @JvmOverloads constructor(
     var name: String = "",
 
     var description: String = "",
+
+    @TypeConverters(UriConverter::class)
+    var imageUri: Uri? = null,
 
     var portions: Int? = null,
 

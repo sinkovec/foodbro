@@ -22,63 +22,105 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/content_margin">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="400dp"
+                            android:scaleType="center"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="placeholder"
+                            android:imageUri="@{viewModel.recipe.imageUri}"/>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:text="@{viewModel.recipe.name}"
-                        android:textAlignment="center"
-                        android:textSize="36sp"
-                        tools:text="Recipe Name"/>
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="@dimen/content_margin">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="50dp"
-                        android:background="?android:attr/listDivider" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="@{viewModel.recipe.name}"
+                            android:textAlignment="center"
+                            android:textSize="36sp"
+                            tools:text="Recipe Name" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="@{viewModel.recipe.description}"
-                        android:textSize="24sp"
-                        tools:text="This is a description for this recipe"/>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/ingredients_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:items="@{viewModel.ingredients}"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/list_item_detail_ingredient"
-                        tools:itemCount="3"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="50dp"
+                            android:background="?android:attr/listDivider" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="50dp"
-                        android:background="?android:attr/listDivider" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/preparations_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:items="@{viewModel.preparationSteps}"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/list_item_detail_preparation"
-                        tools:itemCount="3"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.recipe.description}"
+                            android:textSize="24sp"
+                            tools:text="This is a description for this recipe" />
 
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/ingredients_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:items="@{viewModel.ingredients}"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/list_item_detail_ingredient" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="50dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/preparations_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:items="@{viewModel.preparationSteps}"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/list_item_detail_preparation" />
+
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

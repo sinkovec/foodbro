@@ -1,5 +1,8 @@
 package de.foodbro.app.ui.edit
 
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.PreparationStep
@@ -22,6 +25,9 @@ class RecipeEditViewModel @Inject constructor(
 
     private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
     val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
+
+    private val _openImageEvent = MutableLiveData<Event<Unit>>()
+    val openImageEvent: LiveData<Event<Unit>> = _openImageEvent
 
     private val _openTimePickerDialogEvent = MutableLiveData<Event<Unit>>()
     val openTimePickerDialogEvent: LiveData<Event<Unit>> = _openTimePickerDialogEvent
@@ -85,9 +91,18 @@ class RecipeEditViewModel @Inject constructor(
             TODO("error")
         }
         if (recipe.value?.name.isNullOrBlank()) {
-            TODO("error message")
+            Log.e("=", "Recipe name is null or blank")
         }
         return recipe.value!!
+    }
+
+    fun openImageEvent() {
+        _openImageEvent.value = Event(Unit)
+    }
+
+    fun updateImageUri(imageUri: Uri) {
+        recipe.value?.imageUri = imageUri
+        recipe.notifyObserver()
     }
 
     fun openTimePickerDialog() {
