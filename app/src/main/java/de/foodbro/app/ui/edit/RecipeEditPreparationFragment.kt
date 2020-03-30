@@ -6,14 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import dagger.android.support.DaggerFragment
 import de.foodbro.app.databinding.FragmentRecipeEditPreparationBinding
 import java.util.*
+import javax.inject.Inject
 
-class RecipeEditPreparationFragment : Fragment() {
+class RecipeEditPreparationFragment : DaggerFragment() {
 
-    lateinit var viewModel: RecipeEditViewModel
+    companion object {
+        fun newInstance() = RecipeEditPreparationFragment()
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: RecipeEditViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+    }
 
     private lateinit var viewDataBinding: FragmentRecipeEditPreparationBinding
 

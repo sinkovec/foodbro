@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.support.DaggerFragment
 
 import de.foodbro.app.databinding.FragmentRecipeEditSummaryBinding
 import de.foodbro.app.ui.EventObserver
@@ -19,14 +21,22 @@ import de.foodbro.app.ui.edit.dialogs.DurationPickerDialogFragment
 import java.io.File
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
-class RecipeEditSummaryFragment : Fragment() {
+class RecipeEditSummaryFragment : DaggerFragment() {
 
-    lateinit var viewModel: RecipeEditViewModel
+    companion object {
+        fun newInstance() = RecipeEditSummaryFragment()
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: RecipeEditViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+    }
 
     private lateinit var viewDataBinding: FragmentRecipeEditSummaryBinding
-
-    private lateinit var currentPhotoPath: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,8 +76,7 @@ class RecipeEditSummaryFragment : Fragment() {
         })
 
         viewModel.openTimePickerDialogEvent.observe(viewLifecycleOwner, EventObserver {
-            DurationPickerDialogFragment.newInstance(viewModel)
-                .show(parentFragmentManager, "dialog")
+            DurationPickerDialogFragment.newInstance(viewModel).show(parentFragmentManager, "dialog")
         })
     }
 
@@ -79,10 +88,7 @@ class RecipeEditSummaryFragment : Fragment() {
             "JPEG_${timeStamp}_",
             ".jpg",
             storageDir
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = absolutePath
-        }
+        )
     }
 
 }

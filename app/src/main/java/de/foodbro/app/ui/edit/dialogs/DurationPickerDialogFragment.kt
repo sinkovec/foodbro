@@ -6,14 +6,17 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.support.DaggerDialogFragment
 import de.foodbro.app.ui.edit.RecipeEditViewModel
 import java.util.*
+import javax.inject.Inject
 
 class DurationPickerDialogFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     companion object {
-        private val DEFAULT_HOURS = 0
-        private val DEFAULT_MINUTES = 30
+        private const val DEFAULT_HOURS = 0
+        private const val DEFAULT_MINUTES = 30
 
         fun newInstance(vm: RecipeEditViewModel) = DurationPickerDialogFragment().apply {
             viewModel = vm

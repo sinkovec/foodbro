@@ -12,8 +12,13 @@ import de.foodbro.app.model.Units
 import de.foodbro.app.ui.edit.RecipeEditViewModel
 import kotlinx.android.synthetic.main.fragment_units_dialog.*
 
-
 class UnitsDialogFragment : BottomSheetDialogFragment() {
+
+    companion object {
+        fun newInstance(vm: RecipeEditViewModel) = UnitsDialogFragment().apply {
+            viewModel = vm
+        }
+    }
 
     private lateinit var viewModel: RecipeEditViewModel
 
@@ -46,11 +51,5 @@ class UnitsDialogFragment : BottomSheetDialogFragment() {
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         viewModel.closeBottomSheet()
-    }
-
-    companion object {
-        fun newInstance(vm: RecipeEditViewModel) = UnitsDialogFragment().apply {
-            viewModel = vm
-        }
     }
 }

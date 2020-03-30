@@ -3,6 +3,7 @@ package de.foodbro.app.ui.edit
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -30,7 +31,11 @@ class RecipeEditFragment : DaggerFragment() {
     private lateinit var viewDataBinding: FragmentRecipeEditBinding
 
     @Inject
-    lateinit var viewModel: RecipeEditViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: RecipeEditViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,9 +79,9 @@ class RecipeEditFragment : DaggerFragment() {
         override fun getItemCount(): Int = 3
 
         override fun createFragment(position: Int): Fragment = when(position) {
-            0 -> RecipeEditSummaryFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
-            1 -> RecipeEditIngredientFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
-            2 -> RecipeEditPreparationFragment().apply { viewModel = this@RecipeEditFragment.viewModel }
+            0 -> RecipeEditSummaryFragment.newInstance()
+            1 -> RecipeEditIngredientFragment.newInstance()
+            2 -> RecipeEditPreparationFragment.newInstance()
             else -> throw IllegalArgumentException()
         }
     }

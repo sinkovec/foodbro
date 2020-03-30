@@ -6,14 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.support.DaggerFragment
 
 import de.foodbro.app.databinding.FragmentRecipeEditIngredientBinding
+import de.foodbro.app.di.ViewModelFactory
 import de.foodbro.app.ui.EventObserver
 import de.foodbro.app.ui.edit.dialogs.UnitsDialogFragment
+import javax.inject.Inject
 
-class RecipeEditIngredientFragment : Fragment() {
+class RecipeEditIngredientFragment : DaggerFragment() {
 
-    lateinit var viewModel: RecipeEditViewModel
+    companion object {
+        fun newInstance() = RecipeEditIngredientFragment()
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: RecipeEditViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+    }
 
     private lateinit var viewDataBinding: FragmentRecipeEditIngredientBinding
 
