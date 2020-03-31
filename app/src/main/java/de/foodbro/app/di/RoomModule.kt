@@ -1,23 +1,23 @@
 package de.foodbro.app.di
 
-import android.app.Application
-import android.util.Log
 import androidx.room.OnConflictStrategy
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
+import de.foodbro.app.App
 import de.foodbro.app.database.*
 import javax.inject.Singleton
 
 @Module
-class RoomModule {
+object RoomModule {
 
     @Singleton
     @Provides
-    fun providesRoomDatabase(application: Application): AppDatabase {
-        return Room.inMemoryDatabaseBuilder(application, AppDatabase::class.java)
+    @JvmStatic
+    fun providesRoomDatabase(app: App): AppDatabase {
+        return Room.inMemoryDatabaseBuilder(app, AppDatabase::class.java)
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
@@ -61,14 +61,17 @@ class RoomModule {
 
     @Singleton
     @Provides
+    @JvmStatic
     fun provideRecipeDao(appDatabase: AppDatabase): RecipeDao = appDatabase.recipeDao()
 
     @Singleton
     @Provides
+    @JvmStatic
     fun provideIngredientDao(appDatabase: AppDatabase): IngredientDao = appDatabase.ingredientDao()
 
     @Singleton
     @Provides
+    @JvmStatic
     fun providePreparationDao(appDatabase: AppDatabase): PreparationDao = appDatabase.preparationDao()
 
 }

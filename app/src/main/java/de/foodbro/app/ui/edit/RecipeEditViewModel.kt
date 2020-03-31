@@ -39,6 +39,10 @@ class RecipeEditViewModel @Inject constructor(
     private val _openBottomSheetEvent = MutableLiveData<Event<Unit>>()
     val openBottomSheetEvent: LiveData<Event<Unit>> = _openBottomSheetEvent
 
+    private val _addedPreparationStepEvent = MutableLiveData<Event<Unit>>()
+    val addedPreparationStepEvent: LiveData<Event<Unit>> = _addedPreparationStepEvent
+
+
     fun setup(recipeId: LongArg?) {
         if (recipeId == null) {
             recipe.value = Recipe()
@@ -156,5 +160,7 @@ class RecipeEditViewModel @Inject constructor(
         val pos = preparationSteps.value?.size?.plus(1) ?: TODO("error")
         preparationSteps.value?.add(PreparationStep(pos=pos))
         preparationSteps.notifyObserver()
+
+        _addedPreparationStepEvent.value = Event(Unit)
     }
 }

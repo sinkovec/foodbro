@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentUnitsDialogBinding
 import de.foodbro.app.model.Units
 import de.foodbro.app.ui.edit.RecipeEditViewModel
@@ -23,6 +25,11 @@ class UnitsDialogFragment : BottomSheetDialogFragment() {
     private lateinit var viewModel: RecipeEditViewModel
 
     private lateinit var viewDataBinding: FragmentUnitsDialogBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

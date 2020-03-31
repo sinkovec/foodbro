@@ -33,7 +33,7 @@ class RecipeEditSummaryFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: RecipeEditViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+        ViewModelProvider(requireParentFragment(), viewModelFactory)[RecipeEditViewModel::class.java]
     }
 
     private lateinit var viewDataBinding: FragmentRecipeEditSummaryBinding

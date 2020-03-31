@@ -1,4 +1,4 @@
-package de.foodbro.app.di
+package de.foodbro.app.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

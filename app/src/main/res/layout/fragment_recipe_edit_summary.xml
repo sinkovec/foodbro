@@ -8,119 +8,124 @@
             type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/content_margin">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/dashed_border"
-            android:onClick="@{() -> viewModel.openImageEvent()}">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:contentDescription="placeholder"
-                android:src="@drawable/ic_add_a_photo_white_24dp_70a" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="200dp"
-                android:layout_centerInParent="true"
-                android:scaleType="center"
-                android:adjustViewBounds="true"
-                android:contentDescription="placeholder"
-                android:imageUri="@{viewModel.recipe.imageUri}" />
-        </RelativeLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/recipe_edit_summary_recipe_name_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="@={viewModel.recipe.name}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="@dimen/content_margin">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/recipe_edit_summary_recipe_portions_hint">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/dashed_border"
+                android:onClick="@{() -> viewModel.openImageEvent()}">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="placeholder"
+                    android:src="@drawable/ic_add_a_photo_white_24dp_70a" />
+
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@={viewModel.recipe.portions}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:maxHeight="200dp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="placeholder"
+                    android:imageUri="@{viewModel.recipe.imageUri}" />
+            </RelativeLayout>
 
             <Space
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@{viewModel.recipe.printPreparationTime()}"
-                android:onClick="@{() -> viewModel.openTimePickerDialog()}"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                tools:text="1 h 30 min"/>
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="match_parent" />
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/recipe_edit_summary_recipe_difficulty_hint">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@={viewModel.recipe.difficulty}" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/recipe_edit_summary_recipe_description_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:text="@={viewModel.recipe.description}" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:hint="@string/recipe_edit_summary_recipe_name_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@={viewModel.recipe.name}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/recipe_edit_summary_recipe_portions_hint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@={viewModel.recipe.portions}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.recipe.printPreparationTime()}"
+                    android:onClick="@{() -> viewModel.openTimePickerDialog()}"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    tools:text="1 h 30 min"/>
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/recipe_edit_summary_recipe_difficulty_hint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@={viewModel.recipe.difficulty}" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_edit_summary_recipe_description_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:text="@={viewModel.recipe.description}" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>

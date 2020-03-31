@@ -34,7 +34,7 @@ class RecipeEditFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: RecipeEditViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory)[RecipeEditViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[RecipeEditViewModel::class.java]
     }
 
     override fun onCreateView(
