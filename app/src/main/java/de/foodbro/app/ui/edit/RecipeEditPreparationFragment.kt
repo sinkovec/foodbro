@@ -43,30 +43,12 @@ class RecipeEditPreparationFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val listAdapter = PreparationsAdapter()
         viewDataBinding.preparationsList.adapter = listAdapter
-        viewModel.preparationSteps.observe(viewLifecycleOwner, Observer {
-            listAdapter.submitList(it)
+        viewModel.recipeDetail.observe(viewLifecycleOwner, Observer {
+            listAdapter.submitList(it.preparationSteps)
         })
 
         viewModel.addedPreparationStepEvent.observe(viewLifecycleOwner, EventObserver {
             viewDataBinding.preparationsList.smoothScrollToPosition(listAdapter.itemCount)
         })
-
-//        val touchHelper = ItemTouchHelper(object :
-//            ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
-//            override fun onMove(
-//                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-//                target: RecyclerView.ViewHolder
-//            ): Boolean {
-//                val fromPosition = viewHolder.adapterPosition
-//                val toPosition = target.adapterPosition
-//                listAdapter.notifyItemMoved(fromPosition, toPosition)
-//                viewModel.onPreparationStepMoved(fromPosition, toPosition)
-//                return true
-//            }
-//
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//            }
-//        })
-//        touchHelper.attachToRecyclerView(viewDataBinding.preparationsList)
     }
 }

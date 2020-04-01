@@ -1,6 +1,5 @@
 package de.foodbro.app.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import de.foodbro.app.database.IngredientDao
 import de.foodbro.app.database.PreparationDao
@@ -8,6 +7,7 @@ import de.foodbro.app.database.RecipeDao
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.PreparationStep
 import de.foodbro.app.model.Recipe
+import de.foodbro.app.model.RecipeDetail
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,21 +17,16 @@ class RecipeDetailRepository
                         private val ingredientDao: IngredientDao,
                         private val preparationDao: PreparationDao) {
 
-    fun observeRecipeById(id: Long): LiveData<Recipe> = recipeDao.observeById(id)
+    fun observeById(id: Long): LiveData<RecipeDetail> = recipeDao.observeById(id)
 
-    fun observeIngredientsByRecipeId(id: Long): LiveData<List<Ingredient>> = ingredientDao.observeByRecipeId(id)
+    suspend fun getById(id: Long): RecipeDetail? = recipeDao.getById(id)
 
-    fun observePreparationStepsByRecipeId(id: Long): LiveData<List<PreparationStep>> = preparationDao.observeByRecipeId(id)
-
-    suspend fun getRecipeById(id: Long): Recipe? = recipeDao.getById(id)
-
-    suspend fun getIngredientsByRecipeId(id: Long): List<Ingredient> = ingredientDao.getByRecipeId(id)
-
-    suspend fun getPreparationStepsByRecipeId(id: Long): List<PreparationStep> = preparationDao.getByRecipeId(id)
-
-    suspend fun insert(recipe: Recipe, ingredients: List<Ingredient>, preparation: List<PreparationStep>) {
-        val id = recipeDao.insert(recipe)
-        ingredientDao.insertByRecipeId(id, ingredients)
-        preparationDao.insertByRecipeId(id, preparation)
+    suspend fun insert(recipeDetail: RecipeDetail): Long {
+        val id = recipeDao.insert(recipeDetail.recipe)
+        recipeDetail.ingredients.forEach { it.apply { it.recipeId = id } }
+        recipeDetail.preparationSteps.forEach { it.apply { it.recipeId = id } }
+        ingredientDao.insert(*recipeDetail.ingredients.toTypedArray())
+        preparationDao.insert(*recipeDetail.preparationSteps.toTypedArray())
+        return id
     }
 }

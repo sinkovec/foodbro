@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
@@ -20,26 +21,32 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/dashed_border"
+                android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.openImageEvent()}">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:contentDescription="placeholder"
-                    android:src="@drawable/ic_add_a_photo_white_24dp_70a" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="@{imageView.getDrawable() == null ? View.VISIBLE : View.GONE}"
+                    android:background="@drawable/dashed_border">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="placeholder"
+                        android:src="@drawable/ic_add_a_photo_white_24dp_70a" />
+                </RelativeLayout>
 
                 <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxHeight="200dp"
                     android:layout_centerInParent="true"
-                    android:scaleType="center"
+                    android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:contentDescription="placeholder"
-                    android:imageUri="@{viewModel.recipe.imageUri}" />
+                    android:imageUri="@{viewModel.recipeDetail.recipe.imageUri}" />
             </RelativeLayout>
 
             <Space
@@ -55,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="@={viewModel.recipe.name}" />
+                    android:text="@={viewModel.recipeDetail.recipe.name}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
@@ -77,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:text="@={viewModel.recipe.portions}" />
+                        android:text="@={viewModel.recipeDetail.recipe.portions}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
@@ -88,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{viewModel.recipe.printPreparationTime()}"
+                    android:text="@{viewModel.recipeDetail.recipe.printPreparationTime()}"
                     android:onClick="@{() -> viewModel.openTimePickerDialog()}"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     tools:text="1 h 30 min"/>
@@ -107,7 +114,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:text="@={viewModel.recipe.difficulty}" />
+                        android:text="@={viewModel.recipeDetail.recipe.difficulty}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -124,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:text="@={viewModel.recipe.description}" />
+                    android:text="@={viewModel.recipeDetail.recipe.description}" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>

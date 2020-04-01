@@ -5,8 +5,6 @@ import dagger.android.ContributesAndroidInjector
 import de.foodbro.app.ui.edit.RecipeEditIngredientFragment
 import de.foodbro.app.ui.edit.RecipeEditPreparationFragment
 import de.foodbro.app.ui.edit.RecipeEditSummaryFragment
-import de.foodbro.app.ui.edit.dialogs.DurationPickerDialogFragment
-import de.foodbro.app.ui.edit.dialogs.UnitsDialogFragment
 
 @Module
 abstract class RecipeEditFragmentBuildersModule {

@@ -9,5 +9,5 @@ class UriConverter {
     fun toUri(value: String?): Uri? = value?.let { Uri.parse(value) }
 
     @TypeConverter
-    fun toString(uri: Uri?): String? = uri.toString()
+    fun toString(uri: Uri?): String? = uri?.toString()
 }

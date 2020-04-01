@@ -13,6 +13,7 @@ fun chiliConCarneContentValues(): ContentValues {
     return getSampleRecipeData().stream().map {
         contentValuesOf(Pair("name", it.name),
             Pair("description", it.description),
+            Pair("imageUri", chiliConCarneImageUri()),
             Pair("portions", it.portions),
             Pair("difficulty", it.difficulty),
             Pair("preparationTime", chiliConCarnePreparationTime()))
@@ -62,6 +63,10 @@ fun chiliConCarne(): String {
             "difficulty": 1
         }
     """
+}
+
+fun chiliConCarneImageUri(): String {
+    return "content://de.foodbro.app.fileprovider/recipe_images/Pictures/chili-con-carne-2.jpg"
 }
 
 fun chiliConCarnePreparationTime(): String {

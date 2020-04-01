@@ -5,7 +5,6 @@ import de.foodbro.app.databinding.ListItemEditIngredientBinding
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.ui.adapter.AbstractAdapter
 import de.foodbro.app.ui.adapter.AbstractIngredientsAdapter
-import javax.inject.Inject
 
 class IngredientsAdapter (
     private val viewModel: RecipeEditViewModel
@@ -26,4 +25,5 @@ class IngredientsAdapter (
         }
     }
 }
+
 

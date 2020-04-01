@@ -60,8 +60,8 @@ class RecipeEditViewModelTest {
 
         // then
         // assertThat(viewModel.name, `is`(equalTo(recipe.name)))
-        assertNotNull(viewModel.recipe.value)
-        assertEquals(viewModel.recipe.value?.name, testRecipe.name)
+        assertNotNull(viewModel.recipeDetail.value)
+        assertEquals(viewModel.recipeDetail.value?.name, testRecipe.name)
     }
 
     @Test

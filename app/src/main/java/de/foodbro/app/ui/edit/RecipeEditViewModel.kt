@@ -2,12 +2,9 @@ package de.foodbro.app.ui.edit
 
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.*
-import de.foodbro.app.model.Ingredient
-import de.foodbro.app.model.PreparationStep
-import de.foodbro.app.model.Recipe
-import de.foodbro.app.model.Units
+import de.foodbro.app.model.*
 import de.foodbro.app.repository.RecipeDetailRepository
 import de.foodbro.app.ui.Event
 import de.foodbro.app.util.LongArg
@@ -19,12 +16,10 @@ class RecipeEditViewModel @Inject constructor(
     private val recipeDetailRepository: RecipeDetailRepository
 ) : ViewModel() {
 
-    val recipe = MutableLiveData<Recipe>()
-    val ingredients = MutableLiveData<MutableList<Ingredient>>()
-    val preparationSteps = MutableLiveData<MutableList<PreparationStep>>()
+    val recipeDetail = MutableLiveData<RecipeDetail>()
 
-    private val _recipeUpdatedEvent = MutableLiveData<Event<Unit>>()
-    val recipeUpdatedEvent: LiveData<Event<Unit>> = _recipeUpdatedEvent
+    private val _recipeUpdatedEvent = MutableLiveData<Event<Long>>()
+    val recipeUpdatedEvent: LiveData<Event<Long>> = _recipeUpdatedEvent
 
     private val _openImageEvent = MutableLiveData<Event<Unit>>()
     val openImageEvent: LiveData<Event<Unit>> = _openImageEvent
@@ -36,77 +31,59 @@ class RecipeEditViewModel @Inject constructor(
     private val _selectedIngredient = MutableLiveData<Ingredient>()
     val selectedIngredient: LiveData<Ingredient> = _selectedIngredient
 
+    private val _showPopupEvent = MutableLiveData<Event<View>>()
+    val showPopupEvent: LiveData<Event<View>> = _showPopupEvent
+
     private val _openBottomSheetEvent = MutableLiveData<Event<Unit>>()
     val openBottomSheetEvent: LiveData<Event<Unit>> = _openBottomSheetEvent
+
+    private val _closeBottomSheetEvent = MutableLiveData<Event<Unit>>()
+    val closeBottomSheetEvent: LiveData<Event<Unit>> = _closeBottomSheetEvent
 
     private val _addedPreparationStepEvent = MutableLiveData<Event<Unit>>()
     val addedPreparationStepEvent: LiveData<Event<Unit>> = _addedPreparationStepEvent
 
-
     fun setup(recipeId: LongArg?) {
         if (recipeId == null) {
-            recipe.value = Recipe()
-            ingredients.value = mutableListOf()
-            preparationSteps.value = mutableListOf()
+            recipeDetail.value = RecipeDetail(Recipe(), mutableListOf(), mutableListOf())
         } else {
             val id = recipeId.arg
-            loadRecipe(id)
-            loadIngredients(id)
-            loadPreparationSteps(id)
+            loadRecipeDetail(id)
         }
     }
 
-    private fun loadRecipe(recipeId: Long) = viewModelScope.launch {
-        recipeDetailRepository.getRecipeById(recipeId).let {
+    private fun loadRecipeDetail(recipeId: Long) = viewModelScope.launch {
+        recipeDetailRepository.getById(recipeId).let {
             if (it == null) {
                 TODO("error message")
             } else {
-                recipe.value = it
+                recipeDetail.value = it
             }
         }
     }
 
-    private fun loadIngredients(recipeId: Long) = viewModelScope.launch {
-        recipeDetailRepository.getIngredientsByRecipeId(recipeId).let {
-            ingredients.value = it.toMutableList()
-        }
-    }
-
-    private fun loadPreparationSteps(recipeId: Long) = viewModelScope.launch {
-        recipeDetailRepository.getPreparationStepsByRecipeId(recipeId).let {
-            preparationSteps.value = it.toMutableList()
-        }
-    }
-
     fun saveRecipe() {
-        val recipe = getRecipe()
-        viewModelScope.launch {
-            recipeDetailRepository.insert(
-                recipe,
-                ingredients.value.orEmpty(),
-                preparationSteps.value.orEmpty()
-            )
-        }
-        _recipeUpdatedEvent.value = Event(Unit)
-    }
-
-    private fun getRecipe(): Recipe {
-        if (recipe.value == null) {
+        if (recipeDetail.value == null) {
             TODO("error")
         }
-        if (recipe.value?.name.isNullOrBlank()) {
+        if (recipeDetail.value?.recipe?.name.isNullOrBlank()) {
             Log.e("=", "Recipe name is null or blank")
+            return
         }
-        return recipe.value!!
+        val recipeDetail = recipeDetail.value!!
+        viewModelScope.launch {
+            val id = recipeDetailRepository.insert(recipeDetail)
+            _recipeUpdatedEvent.value = Event(id)
+        }
     }
 
     fun openImageEvent() {
         _openImageEvent.value = Event(Unit)
     }
 
-    fun updateImageUri(imageUri: Uri) {
-        recipe.value?.imageUri = imageUri
-        recipe.notifyObserver()
+    fun setImageUri(imageUri: Uri) {
+        recipeDetail.value?.recipe?.imageUri = imageUri
+        recipeDetail.notifyObserver()
     }
 
     fun openTimePickerDialog() {
@@ -114,53 +91,65 @@ class RecipeEditViewModel @Inject constructor(
     }
 
     fun updatePreparationTime(hours: Int, minutes: Int) {
-        recipe.value?.preparationTime = Pair(hours, minutes)
-        recipe.notifyObserver()
+        recipeDetail.value?.recipe?.preparationTime = Pair(hours, minutes)
+        recipeDetail.notifyObserver()
+    }
+
+    fun showPopupIngredientEvent(view: View, ingredient: Ingredient) {
+        _selectedIngredient.value = ingredient
+        _showPopupEvent.value = Event(view)
     }
 
     fun addIngredient() {
-        val ingredient = Ingredient()
         isNewIngredient = true
-        openBottomSheet(ingredient)
+        _selectedIngredient.value = Ingredient()
+        openBottomSheetEvent()
     }
 
-    fun editIngredient(ingredient: Ingredient) {
+    fun editSelectedIngredient() {
         isNewIngredient = false
-        openBottomSheet(ingredient)
+        openBottomSheetEvent()
     }
 
-    private fun openBottomSheet(ingredient: Ingredient) {
+    fun deleteSelectedIngredient() {
+        _selectedIngredient.value?.let {
+            recipeDetail.value?.ingredients?.remove(it)
+            recipeDetail.notifyObserver()
+        }
+    }
+
+    private fun openBottomSheetEvent() {
         _openBottomSheetEvent.value = Event(Unit)
-        _selectedIngredient.value = ingredient
     }
 
-    fun closeBottomSheet() {
+    fun saveIngredient() {
         val ingredient = _selectedIngredient.value
         if (isNewIngredient && ingredient != null && isIngredientValid(ingredient)) {
-            ingredients.value?.add(_selectedIngredient.value!!)
+            recipeDetail.value?.ingredients?.add(ingredient)
         }
-        ingredients.notifyObserver()
+        recipeDetail.notifyObserver()
+        closeBottomSheetEvent()
     }
 
     private fun isIngredientValid(ingredient: Ingredient) = ingredient.name.isNotBlank()
 
-    fun isChecked(unit: Units) = _selectedIngredient.value?.unit?.equals(unit) ?: false
+    fun cancelIngredientDialog() {
+        closeBottomSheetEvent()
+    }
 
-    fun check(unit: Units) {
-        val currentUnit = _selectedIngredient.value?.unit
-        if (currentUnit != null && currentUnit == unit) {
-            _selectedIngredient.value?.unit = null
-        } else {
-            _selectedIngredient.value?.unit = unit
-        }
-        _selectedIngredient.notifyObserver()
+    private fun closeBottomSheetEvent() {
+        _closeBottomSheetEvent.value = Event(Unit)
     }
 
     fun addPreparationStep() {
-        val pos = preparationSteps.value?.size?.plus(1) ?: TODO("error")
-        preparationSteps.value?.add(PreparationStep(pos=pos))
-        preparationSteps.notifyObserver()
+        val pos = recipeDetail.value?.preparationSteps?.size?.plus(1) ?: TODO("error")
+        recipeDetail.value?.preparationSteps?.add(PreparationStep(pos=pos))
+        recipeDetail.notifyObserver()
 
         _addedPreparationStepEvent.value = Event(Unit)
+    }
+
+    fun showPopupPreparationEvent(view: View, preparationStep: PreparationStep) {
+
     }
 }

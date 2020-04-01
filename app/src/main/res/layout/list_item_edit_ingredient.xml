@@ -13,12 +13,13 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/ingredients_list_item_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/content_horizontal_margin"
         android:paddingVertical="4dp"
-        android:onClick="@{() -> viewModel.editIngredient(ingredient)}">
+        android:onClick="@{() -> viewModel.showPopupIngredientEvent(ingredientsListItemLayout, ingredient)}">
 
         <TextView
             android:layout_width="0dp"
@@ -40,5 +41,19 @@
             android:text="@{ingredient.name}"
             android:textSize="24sp"
             tools:text="Test"/>
+
+<!--        <Space-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="match_parent"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/imageButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/ic_more_vert_white_24dp_70a"-->
+<!--            android:contentDescription="TODO"-->
+<!--            android:onClick="@{() -> viewModel.showPopupEvent(imageButton, ingredient)}" />-->
     </LinearLayout>
 </layout>

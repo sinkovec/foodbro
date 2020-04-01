@@ -13,6 +13,8 @@ import de.foodbro.app.R
 
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
+import de.foodbro.app.util.LongArg
+import de.foodbro.app.util.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_recipe_edit.*
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
@@ -61,7 +63,12 @@ class RecipeEditFragment : DaggerFragment() {
 
     private fun setupNavigation() {
         viewModel.recipeUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
-            val action = RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipesFragmentDest()
+            // hide keyboard if it's still open
+            hideSoftKeyboard()
+
+            val action = RecipeEditFragmentDirections.actionRecipeEditFragmentDestToRecipeDetailFragmentDest(
+                LongArg(it)
+            )
             findNavController().navigate(action)
         })
     }

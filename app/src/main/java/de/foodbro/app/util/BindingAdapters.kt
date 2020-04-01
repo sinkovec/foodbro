@@ -65,15 +65,17 @@ fun getInt(view: EditText): Int? {
 }
 
 @BindingAdapter("android:text")
-fun setUnit(view: ToggleButton, value: Units?) {
+fun setUnit(view: EditText, value: Units?) {
     value?.let {
-        val str = it.toString()
-        view.apply {
-            text = str
-            textOff = str
-            textOn = str
+        if (view.text.toString() != it.toString()) {
+            view.setText(it.toString())
         }
     }
+}
+
+@InverseBindingAdapter(attribute = "android:text")
+fun getUnit(view: EditText): Units? {
+    return Units.getValue(view.text.toString())
 }
 
 @BindingAdapter("android:imageUri")

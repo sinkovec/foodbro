@@ -3,6 +3,7 @@ package de.foodbro.app.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import de.foodbro.app.model.Recipe
+import de.foodbro.app.model.RecipeDetail
 
 @Dao
 interface RecipeDao {
@@ -10,11 +11,13 @@ interface RecipeDao {
     @Query("SELECT * FROM recipe_table")
     fun observeAll(): LiveData<List<Recipe>>
 
+    @Transaction
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    fun observeById(id: Long): LiveData<Recipe>
+    fun observeById(id: Long): LiveData<RecipeDetail>
 
+    @Transaction
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    suspend fun getById(id: Long): Recipe?
+    suspend fun getById(id: Long): RecipeDetail?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recipe: Recipe): Long

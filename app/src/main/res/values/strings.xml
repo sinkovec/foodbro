@@ -21,6 +21,11 @@
     <string name="recipe_edit_summary_recipe_difficulty_hint">Difficulty</string>
 
     <string name="recipe_edit_ingredient_add_btn">Add Ingredient</string>
+    <string name="recipe_edit_ingredient_dialog_quantity_hint">Quantity</string>
+    <string name="recipe_edit_ingredient_dialog_units_hint">Unit</string>
+    <string name="recipe_edit_ingredient_dialog_name_hint">Name</string>
+    <string name="recipe_edit_ingredient_dialog_save_btn">Save</string>
+    <string name="recipe_edit_ingredient_dialog_cancel_btn">Cancel</string>
 
     <string name="recipe_edit_preparation_add_btn">Add Preparation Step</string>
     <string name="recipe_edit_preparation_hint">Preparation Step</string>

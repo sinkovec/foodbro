@@ -31,6 +31,10 @@ abstract class AbstractAdapter<T : ViewDataBinding, S>(diffCallback: DiffUtil.It
         notifyDataSetChanged()
     }
 
+    public override fun getItem(position: Int): S {
+        return super.getItem(position)
+    }
+
     abstract class ViewHolder<T : ViewDataBinding, S>(protected val binding: T) :
         RecyclerView.ViewHolder(binding.root) {
 
