@@ -148,8 +148,4 @@ class RecipeEditViewModel @Inject constructor(
 
         _addedPreparationStepEvent.value = Event(Unit)
     }
-
-    fun showPopupPreparationEvent(view: View, preparationStep: PreparationStep) {
-
-    }
 }
