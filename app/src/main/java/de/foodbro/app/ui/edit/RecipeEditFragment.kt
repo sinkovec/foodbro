@@ -11,7 +11,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
 import de.foodbro.app.R
 
-import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.ui.EventObserver
 import de.foodbro.app.util.LongArg
 import de.foodbro.app.util.hideSoftKeyboard
@@ -30,8 +29,6 @@ class RecipeEditFragment : DaggerFragment() {
 
     private val args: RecipeEditFragmentArgs by navArgs()
 
-    private lateinit var viewDataBinding: FragmentRecipeEditBinding
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -43,20 +40,15 @@ class RecipeEditFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
-            viewModel = this@RecipeEditFragment.viewModel
-            lifecycleOwner = this@RecipeEditFragment.viewLifecycleOwner
-        }
-        viewModel.setup(args.recipeId)
-
-        setHasOptionsMenu(true)
-
-        return viewDataBinding.root
+        return inflater.inflate(R.layout.fragment_recipe_edit, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        viewModel.start(args.recipeId)
+
+        setHasOptionsMenu(true)
         setupNavigation()
         setupViewPager()
     }

@@ -43,7 +43,7 @@ class RecipeEditViewModel @Inject constructor(
     private val _addedPreparationStepEvent = MutableLiveData<Event<Unit>>()
     val addedPreparationStepEvent: LiveData<Event<Unit>> = _addedPreparationStepEvent
 
-    fun setup(recipeId: LongArg?) {
+    fun start(recipeId: LongArg?) {
         if (recipeId == null) {
             recipeDetail.value = RecipeDetail(Recipe(), mutableListOf(), mutableListOf())
         } else {

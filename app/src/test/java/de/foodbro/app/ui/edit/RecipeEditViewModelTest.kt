@@ -56,7 +56,7 @@ class RecipeEditViewModelTest {
             .thenReturn(testRecipe)
 
         // when
-        viewModel.setup(LongArg(0))
+        viewModel.start(LongArg(0))
 
         // then
         // assertThat(viewModel.name, `is`(equalTo(recipe.name)))
@@ -73,7 +73,7 @@ class RecipeEditViewModelTest {
             .thenReturn(listOf(testIngredient))
 
         // when
-        viewModel.setup(LongArg(0))
+        viewModel.start(LongArg(0))
 
         // then
         assertNotNull(viewModel.ingredients.value)
