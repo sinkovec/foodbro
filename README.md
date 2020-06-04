@@ -2,7 +2,7 @@
 
 ## Overview
 A simple android app to store recipes.
-Started this project to become more familiar with android development, especially it's with best practices.
+Started this project to become more familiar with android development, especially with [Android's Architecture Components](https://developer.android.com/topic/libraries/architecture) .
 
 ## Technologies and Architectural Design
 * Kotlin
