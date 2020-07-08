@@ -1,20 +1,22 @@
-apply plugin: "com.android.application"
-apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
-apply plugin: "kotlin-kapt"
-apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion '29.0.3'
+
     defaultConfig {
-        applicationId "de.foodbro.app"
+        applicationId 'de.foodbro.app'
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionName '1.0'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -24,8 +26,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     testOptions.unitTests {
@@ -33,51 +35,52 @@ android {
         includeAndroidResources = true
     }
 }
+
 dependencies {
     // AndroidX libraries
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.fragment:fragment:1.2.3"
-    implementation "androidx.fragment:fragment-ktx:1.2.3"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.fragment:fragment:1.2.5'
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     // Lifecycle libraries
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Room components
-    implementation "androidx.room:room-runtime:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5"
-//    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+    implementation 'androidx.room:room-runtime:2.2.5'
+    implementation 'androidx.room:room-ktx:2.2.5'
+    kapt 'androidx.room:room-compiler:2.2.5'
+//    androidTestImplementation 'androidx.room:room-testing:$roomVersion'
 
     // Navigation component
-    implementation "androidx.navigation:navigation-fragment-ktx:2.2.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
-//    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.2.1"
-//    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+//    implementation 'androidx.navigation:navigation-dynamic-features-fragment:2.2.1'
+//    androidTestImplementation 'androidx.navigation:navigation-testing:$navigationVersion'
 
     // Google Material Design
-    implementation "com.google.android.material:material:1.1.0"
+    implementation 'com.google.android.material:material:1.1.0'
 
     // Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5'
 
     // Jackson library
     //noinspection GradleDynamicVersion
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.10+"
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.10+'
 
     // Dagger
-    implementation "com.google.dagger:dagger:2.26"
-    implementation "com.google.dagger:dagger-android:2.26"
-    implementation "com.google.dagger:dagger-android-support:2.26"
-    kapt "com.google.dagger:dagger-compiler:2.26"
-    kapt "com.google.dagger:dagger-android-processor:2.26"
+    implementation 'com.google.dagger:dagger:2.26'
+    implementation 'com.google.dagger:dagger-android:2.26'
+    implementation 'com.google.dagger:dagger-android-support:2.26'
+    kapt 'com.google.dagger:dagger-compiler:2.26'
+    kapt 'com.google.dagger:dagger-android-processor:2.26'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -85,19 +88,19 @@ dependencies {
 
     // Android Testing
     testImplementation 'androidx.test:core:1.2.0'
-    androidTestImplementation "androidx.test:runner:1.2.0"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     // JUnit
-    testImplementation 'junit:junit:4.12'
-//    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
-//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.0"
-//    testImplementation "org.junit.jupiter:junit-jupiter-params:5.6.0"
+    testImplementation 'junit:junit:4.13'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.0'
 
     // Hamcrest
-    testImplementation "org.hamcrest:hamcrest-all:1.3"
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
 
     // Mockito
-    testImplementation "org.mockito:mockito-core:3.1.0"
+    testImplementation 'org.mockito:mockito-core:3.1.0'
     testImplementation 'org.mockito:mockito-inline:3.1.0'
 }
