@@ -3,10 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/recipeListFragment">
+    app:startDestination="@id/fragment_recipe_list_dest">
+
     <fragment
-        android:id="@+id/recipeListFragment"
+        android:id="@+id/fragment_recipe_list_dest"
         android:name="de.foodbro.app.ui.RecipeListFragment"
-        android:label="fragment_recipe_item_list"
-        tools:layout="@layout/fragment_recipe_list" />
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_fragment_recipe_list_dest_to_fragment_recipe_detail_dest"
+            app:destination="@id/fragment_recipe_detail_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_recipe_detail_dest"
+        android:name="de.foodbro.app.ui.RecipeDetailFragment"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

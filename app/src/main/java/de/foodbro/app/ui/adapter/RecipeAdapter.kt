@@ -2,11 +2,14 @@ package de.foodbro.app.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import de.foodbro.app.data.Recipe
 import de.foodbro.app.databinding.ListItemRecipeBinding
+import de.foodbro.app.ui.RecipeListFragmentDirections
 
 class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback()) {
 
@@ -22,21 +25,18 @@ class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCall
     }
 
     class RecipeViewHolder(private val binding: ListItemRecipeBinding) : RecyclerView.ViewHolder(binding.root) {
-//        init {
-//            binding.setClickListener {
-//                binding.plant.let { plant ->
-//                    navigateToPlant(plant, it)
-//                }
-//            }
-//        }
-//
-//        private fun navigateToPlant(plant: Plant, view: View) {
-//            val direction =
-//                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-//                    plant.plantId
-//                )
-//            view.findNavController().navigate(direction)
-//        }
+        init {
+            binding.setClickListener {
+                binding.recipe?.let { recipe ->
+                    navigateToRecipe(recipe, it)
+                }
+            }
+        }
+
+        private fun navigateToRecipe(recipe: Recipe, view: View) {
+            val direction = RecipeListFragmentDirections.actionFragmentRecipeListDestToFragmentRecipeDetailDest(recipe.recipeId)
+            view.findNavController().navigate(direction)
+        }
 
         fun bind(item: Recipe) {
             binding.apply {

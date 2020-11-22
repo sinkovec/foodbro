@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 30
@@ -37,6 +38,9 @@ android {
 }
 
 dependencies {
+    // Kotlin Standard Lib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
@@ -53,6 +57,10 @@ dependencies {
     // Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
     kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
+
+    // Assisted Inject
+    compileOnly 'com.squareup.inject:assisted-inject-annotations-dagger2:0.6.0'
+    kapt 'com.squareup.inject:assisted-inject-processor-dagger2:0.6.0'
 
     // Room components
     implementation 'androidx.room:room-runtime:2.2.5'

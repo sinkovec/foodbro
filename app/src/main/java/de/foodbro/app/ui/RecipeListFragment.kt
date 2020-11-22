@@ -17,14 +17,11 @@ class RecipeListFragment : Fragment() {
     private val viewModel: RecipeListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentRecipeListBinding.inflate(inflater, container, false)
-        context ?: return binding.root
-
-        val adapter = RecipeAdapter()
-        binding.recipeList.adapter = adapter
-        subscribeUi(adapter)
-
-        return binding.root
+        return FragmentRecipeListBinding.inflate(inflater, container, false).apply {
+            recipeList.adapter = RecipeAdapter().also {
+                subscribeUi(it)
+            }
+        }.root
     }
 
     private fun subscribeUi(adapter: RecipeAdapter) {

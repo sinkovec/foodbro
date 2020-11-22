@@ -8,4 +8,6 @@ import javax.inject.Singleton
 class RecipeRepository @Inject constructor(private val recipeDao: RecipeDao) {
 
     fun getRecipes() = recipeDao.getRecipes()
+
+    fun getRecipe(id: Int) = recipeDao.getRecipe(id)
 }
