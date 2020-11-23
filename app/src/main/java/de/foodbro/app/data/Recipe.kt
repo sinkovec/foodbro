@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 )
 data class Recipe constructor(
     @PrimaryKey(autoGenerate = true)
-    val recipeId : Int,
+    var recipeId : Int,
 
-    val name : String,
+    var name : String,
 )

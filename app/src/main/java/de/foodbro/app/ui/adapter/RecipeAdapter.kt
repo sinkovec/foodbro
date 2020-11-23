@@ -28,12 +28,12 @@ class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCall
         init {
             binding.setClickListener {
                 binding.recipe?.let { recipe ->
-                    navigateToRecipe(recipe, it)
+                    navigateToRecipeDetail(recipe, it)
                 }
             }
         }
 
-        private fun navigateToRecipe(recipe: Recipe, view: View) {
+        private fun navigateToRecipeDetail(recipe: Recipe, view: View) {
             val direction = RecipeListFragmentDirections.actionFragmentRecipeListDestToFragmentRecipeDetailDest(recipe.recipeId)
             view.findNavController().navigate(direction)
         }

@@ -10,5 +10,5 @@ class RecipeListViewModel @ViewModelInject internal constructor(
     recipeRepository: RecipeRepository
 ): ViewModel() {
 
-    val recipes: LiveData<List<Recipe>> = recipeRepository.getRecipes()
+    val recipes = recipeRepository.getRecipes()
 }

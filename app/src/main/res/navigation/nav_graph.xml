@@ -21,5 +21,18 @@
         <argument
             android:name="recipeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragment_recipe_detail_dest_to_fragment_recipe_edit_dest"
+            app:destination="@id/recipeEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeEditFragment"
+        android:name="de.foodbro.app.ui.RecipeEditFragment"
+        android:label="fragment_recipe_edit"
+        tools:layout="@layout/fragment_recipe_edit">
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
     </fragment>
 </navigation>

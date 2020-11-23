@@ -16,5 +16,8 @@ interface RecipeDao {
     fun getRecipe(id: Int): LiveData<Recipe>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(recipe: Recipe)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(recipeList: List<Recipe>)
 }

@@ -9,20 +9,21 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
+import de.foodbro.app.databinding.FragmentRecipeEditBinding
 import de.foodbro.app.viewmodels.RecipeDetailViewModel
+import de.foodbro.app.viewmodels.RecipeEditViewModel
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
-class RecipeDetailFragment : Fragment() {
+class RecipeEditFragment : Fragment() {
 
-    private val args: RecipeDetailFragmentArgs by navArgs()
+    private val args: RecipeEditFragmentArgs by navArgs()
 
     @Inject
-    lateinit var viewModelFactory: RecipeDetailViewModel.AssistedFactory
+    lateinit var viewModelFactory: RecipeEditViewModel.AssistedFactory
 
-    private val viewModel: RecipeDetailViewModel by viewModels {
-        RecipeDetailViewModel.provideFactory(
+    private val viewModel: RecipeEditViewModel by viewModels {
+        RecipeEditViewModel.provideFactory(
             viewModelFactory,
             args.recipeId
         )
@@ -33,32 +34,31 @@ class RecipeDetailFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
-            viewModel = this@RecipeDetailFragment.viewModel
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
+            viewModel = this@RecipeEditFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
         }.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_detail, menu)
+        inflater.inflate(R.menu.menu_edit, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.recipe_detail_action_edit -> navigateToRecipeEdit()
+            R.id.recipe_edit_action_save -> {
+                viewModel.saveRecipe()
+                navigateToRecipeDetail()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun navigateToRecipeEdit() {
+    private fun navigateToRecipeDetail() {
         val direction = RecipeDetailFragmentDirections.actionFragmentRecipeDetailDestToFragmentRecipeEditDest(
             viewModel.recipeId
         )
-        findNavController().navigate(direction)
+        findNavController().navigateUp()
     }
 }

@@ -1,24 +1,26 @@
 package de.foodbro.app.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import de.foodbro.app.data.Recipe
 import de.foodbro.app.repository.RecipeRepository
+import kotlinx.coroutines.launch
 
-class RecipeDetailViewModel @AssistedInject constructor(
+class RecipeEditViewModel @AssistedInject constructor(
     private val recipeRepository: RecipeRepository,
     @Assisted val recipeId: Int
 ): ViewModel() {
 
     val recipe = recipeRepository.getRecipe(recipeId)
 
+    fun saveRecipe() = viewModelScope.launch {
+        recipe.value?.let { recipeRepository.insert(it) }
+    }
+
     @AssistedInject.Factory
     interface AssistedFactory {
-        fun create(recipeId: Int): RecipeDetailViewModel
+        fun create(recipeId: Int): RecipeEditViewModel
     }
 
     companion object {
