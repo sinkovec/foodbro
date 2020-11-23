@@ -3,24 +3,20 @@
 
     <data>
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
-        <variable
-            name="recipe"
-            type="de.foodbro.app.data.Recipe"/>
+            name="ingredient"
+            type="String"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:onClick="@{clickListener}">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@{recipe.name}"
+            android:text="@{ingredient}"
             android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>
 </layout>

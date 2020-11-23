@@ -9,6 +9,8 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
+import de.foodbro.app.ui.adapter.IngredientAdapter
+import de.foodbro.app.ui.adapter.PreparationStepAdapter
 import de.foodbro.app.viewmodels.RecipeDetailViewModel
 import javax.inject.Inject
 
@@ -41,7 +43,25 @@ class RecipeDetailFragment : Fragment() {
         return FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeDetailFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
+            recipeDetailIngredientList.adapter = IngredientAdapter().also {
+                subscribeUi(it)
+            }
+            recipeDetailPreparationList.adapter = PreparationStepAdapter().also {
+                subscribeUi(it)
+            }
         }.root
+    }
+
+    private fun subscribeUi(adapter: IngredientAdapter) {
+        viewModel.recipe.observe(viewLifecycleOwner) {
+            adapter.submitList(it.ingredients)
+        }
+    }
+
+    private fun subscribeUi(adapter: PreparationStepAdapter) {
+        viewModel.recipe.observe(viewLifecycleOwner) {
+            adapter.submitList(it.preparationSteps)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
