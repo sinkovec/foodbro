@@ -13,10 +13,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.RecipeDetailFragment">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@={viewModel.recipe.name}" />
+            android:hint="@string/recipe_edit_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.recipe.name}"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

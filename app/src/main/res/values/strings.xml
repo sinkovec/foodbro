@@ -11,4 +11,5 @@
 
     <!-- RecipeEditFragment -->
     <string name="recipe_edit_action_save">Save</string>
+    <string name="recipe_edit_name_label">Name</string>
 </resources>

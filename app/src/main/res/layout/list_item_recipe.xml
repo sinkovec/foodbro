@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:text="@{recipe.name}"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="Some text" />
     </LinearLayout>
 </layout>
