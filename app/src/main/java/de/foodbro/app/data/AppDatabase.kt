@@ -1,12 +1,11 @@
 package de.foodbro.app.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import de.foodbro.app.data.converter.StringListConverter
 import de.foodbro.app.util.DATABASE_NAME
 import de.foodbro.app.workers.SeedDatabaseWorker
 
@@ -15,6 +14,7 @@ import de.foodbro.app.workers.SeedDatabaseWorker
     version = 1,
     exportSchema = false
 )
+@TypeConverters(value = [StringListConverter::class])
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
 

@@ -1,14 +1,32 @@
 [
   {
     "recipeId": 0,
-    "name": "Chili Con Carne"
+    "name": "Chili Con Carne",
+    "ingredients": [
+      "Chili", "Corn", "Beans"
+    ],
+    "preparationSteps": [
+      "Do", "something"
+    ]
   },
   {
     "recipeId": 1,
-    "name": "Spaghetti Cabonara"
+    "name": "Spaghetti Cabonara",
+    "ingredients": [
+      "Spaghetti", "Eggs", "Cheese"
+    ],
+    "preparationSteps": [
+      "Do", "something"
+    ]
   },
   {
     "recipeId": 2,
-    "name": "British Breakfast"
+    "name": "British Breakfast",
+    "ingredients": [
+      "Tea", "Toast", "Baked Beans"
+    ],
+    "preparationSteps": [
+      "Do", "something"
+    ]
   }
 ]
