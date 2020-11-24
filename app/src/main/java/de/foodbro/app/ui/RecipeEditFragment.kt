@@ -34,9 +34,10 @@ class RecipeEditFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeEditFragment.viewModel
+            lifecycleOwner = viewLifecycleOwner
             lifecycleOwner = viewLifecycleOwner
         }.root
     }
@@ -56,9 +57,6 @@ class RecipeEditFragment : Fragment() {
     }
 
     private fun navigateToRecipeDetail() {
-        val direction = RecipeDetailFragmentDirections.actionFragmentRecipeDetailDestToFragmentRecipeEditDest(
-            viewModel.recipeId
-        )
         findNavController().navigateUp()
     }
 }

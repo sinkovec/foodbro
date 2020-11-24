@@ -35,33 +35,13 @@ class RecipeDetailFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeDetailFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
-            recipeDetailIngredientList.adapter = IngredientAdapter().also {
-                subscribeUi(it)
-            }
-            recipeDetailPreparationList.adapter = PreparationStepAdapter().also {
-                subscribeUi(it)
-            }
+            recipeDetailIngredientList.adapter = IngredientAdapter()
+            recipeDetailPreparationList.adapter = PreparationStepAdapter()
         }.root
-    }
-
-    private fun subscribeUi(adapter: IngredientAdapter) {
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            adapter.submitList(it.ingredients)
-        }
-    }
-
-    private fun subscribeUi(adapter: PreparationStepAdapter) {
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            adapter.submitList(it.preparationSteps)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

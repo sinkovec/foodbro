@@ -41,8 +41,7 @@ class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCall
         fun bind(item: Recipe) {
             binding.apply {
                 recipe = item
-                executePendingBindings()
-            }
+            }.executePendingBindings()
         }
     }
 }

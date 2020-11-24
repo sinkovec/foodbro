@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="de.foodbro.app.viewmodels.RecipeListViewModel" />
+    </data>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_list"
         android:name="de.foodbro.app.ui.RecipeListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        app:layoutManager="LinearLayoutManager"
+        android:items="@{viewModel.recipes}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:context=".ui.RecipeListFragment"
         tools:listitem="@layout/list_item_recipe" />
 </layout>

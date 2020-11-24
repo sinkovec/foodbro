@@ -16,18 +16,12 @@ class RecipeListFragment : Fragment() {
 
     private val viewModel: RecipeListViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return FragmentRecipeListBinding.inflate(inflater, container, false).apply {
-            recipeList.adapter = RecipeAdapter().also {
-                subscribeUi(it)
-            }
+            viewModel = this@RecipeListFragment.viewModel
+            lifecycleOwner = viewLifecycleOwner
+            recipeList.adapter = RecipeAdapter()
         }.root
-    }
-
-    private fun subscribeUi(adapter: RecipeAdapter) {
-        viewModel.recipes.observe(viewLifecycleOwner) { recipes ->
-            adapter.submitList(recipes)
-        }
     }
 
 }
