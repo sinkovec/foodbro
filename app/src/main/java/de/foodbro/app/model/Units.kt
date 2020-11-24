@@ -3,7 +3,7 @@ package de.foodbro.app.model
 enum class Units(
     var abbreviation : String
 ) {
-    NONE("None"),
+    NONE(""),
 
     MILLIGRAM("mg"),
     GRAM("g"),

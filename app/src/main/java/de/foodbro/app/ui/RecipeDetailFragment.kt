@@ -39,8 +39,8 @@ class RecipeDetailFragment : Fragment() {
         return FragmentRecipeDetailBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeDetailFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
-            recipeDetailIngredientList.adapter = IngredientAdapter()
-            recipeDetailPreparationList.adapter = PreparationStepAdapter()
+            ingredientList.adapter = IngredientAdapter()
+            preparationList.adapter = PreparationStepAdapter()
         }.root
     }
 
