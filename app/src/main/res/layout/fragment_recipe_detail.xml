@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_margin="@dimen/text_margin"
-                android:text="@{viewModel.recipe.name}"
+                android:text="@{viewModel.recipeDetail.recipe.name}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 tools:text="Placeholder Recipe Name"/>
 
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                android:items="@{viewModel.recipe.ingredients}"
+                android:items="@{viewModel.recipeDetail.ingredients}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:context=".ui.RecipeDetailFragment"
                 tools:listitem="@layout/list_item_ingredient_detail" />
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                android:items="@{viewModel.recipe.preparationSteps}"
+                android:items="@{viewModel.recipeDetail.recipe.preparationSteps}"
                 app:layoutManager="LinearLayoutManager"
                 tools:context=".ui.RecipeDetailFragment"
                 tools:listitem="@layout/list_item_ingredient_detail" />

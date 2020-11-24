@@ -8,7 +8,7 @@
             type="android.view.View.OnClickListener" />
         <variable
             name="recipe"
-            type="de.foodbro.app.data.Recipe"/>
+            type="de.foodbro.app.model.Recipe"/>
     </data>
 
     <LinearLayout

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Chili",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 1
+  },
+  {
+    "id": 2,
+    "name": "Corn",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 1
+  },
+  {
+    "id": 3,
+    "name": "Beans",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 1
+  },
+  {
+    "id": 4,
+    "name": "Spaghetti",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 2
+  },
+  {
+    "id": 5,
+    "name": "Eggs",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 2
+  },
+  {
+    "id": 6,
+    "name": "Cheese",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 2
+  },
+  {
+    "id": 7,
+    "name": "Tea",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 3
+  },
+  {
+    "id": 8,
+    "name": "Toast",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 3
+  },
+  {
+    "id": 9,
+    "name": "Baked Beans",
+    "quantity": 1,
+    "unit": "NONE",
+    "recipeId": 3
+  }
+]

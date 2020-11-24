@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import de.foodbro.app.data.Recipe
+import de.foodbro.app.model.Recipe
 import de.foodbro.app.databinding.ListItemRecipeBinding
 import de.foodbro.app.ui.RecipeListFragmentDirections
 
@@ -34,7 +34,7 @@ class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCall
         }
 
         private fun navigateToRecipeDetail(recipe: Recipe, view: View) {
-            val direction = RecipeListFragmentDirections.actionFragmentRecipeListDestToFragmentRecipeDetailDest(recipe.recipeId)
+            val direction = RecipeListFragmentDirections.actionFragmentRecipeListDestToFragmentRecipeDetailDest(recipe.id)
             view.findNavController().navigate(direction)
         }
 
@@ -49,7 +49,7 @@ class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCall
 private class RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
 
     override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-        return oldItem.recipeId == newItem.recipeId
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {

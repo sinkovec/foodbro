@@ -3,7 +3,6 @@ package de.foodbro.app.viewmodels
 import androidx.lifecycle.*
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import de.foodbro.app.data.Recipe
 import de.foodbro.app.repository.RecipeRepository
 import kotlinx.coroutines.launch
 
@@ -12,10 +11,10 @@ class RecipeEditViewModel @AssistedInject constructor(
     @Assisted val recipeId: Int
 ): ViewModel() {
 
-    val recipe = recipeRepository.getRecipe(recipeId)
+    val recipeDetail = recipeRepository.getRecipe(recipeId)
 
     fun saveRecipe() = viewModelScope.launch {
-        recipe.value?.let { recipeRepository.insert(it) }
+        recipeDetail.value?.let { recipeRepository.insert(it) }
     }
 
     @AssistedInject.Factory
