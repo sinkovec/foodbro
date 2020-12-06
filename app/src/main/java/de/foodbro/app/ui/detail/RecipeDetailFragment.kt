@@ -9,7 +9,6 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
-import de.foodbro.app.viewmodels.RecipeDetailViewModel
 import javax.inject.Inject
 
 

@@ -1,10 +1,10 @@
-package de.foodbro.app.ui.adapter
+package de.foodbro.app.ui.util
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.foodbro.app.model.Ingredient
 import de.foodbro.app.model.Recipe
-import de.foodbro.app.ui.detail.IngredientAdapter
+import de.foodbro.app.ui.adapter.AbstractIngredientAdapter
 import de.foodbro.app.ui.detail.PreparationStepAdapter
 import de.foodbro.app.ui.list.RecipeAdapter
 
@@ -15,7 +15,7 @@ fun setRecipeItems(listView: RecyclerView, items: List<Recipe>?) {
 
 @BindingAdapter("android:items")
 fun setIngredientItems(listView: RecyclerView, items: List<Ingredient>?) {
-    items?.let((listView.adapter as IngredientAdapter)::submitList)
+    items?.let((listView.adapter as AbstractIngredientAdapter<*>)::submitList)
 }
 
 @BindingAdapter("android:items")

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.databinding.FragmentRecipeListBinding
-import de.foodbro.app.viewmodels.RecipeListViewModel
 
 @AndroidEntryPoint
 class RecipeListFragment : Fragment() {

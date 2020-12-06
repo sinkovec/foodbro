@@ -35,7 +35,7 @@ class RecipeEditFragment : Fragment() {
         return FragmentRecipeEditBinding.inflate(inflater, container, false).apply {
             viewModel = this@RecipeEditFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
-            lifecycleOwner = viewLifecycleOwner
+            ingredientList.adapter = IngredientAdapter()
         }.root
     }
 

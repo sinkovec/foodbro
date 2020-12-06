@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="de.foodbro.app.viewmodels.RecipeListViewModel" />
+            type="de.foodbro.app.ui.list.RecipeListViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

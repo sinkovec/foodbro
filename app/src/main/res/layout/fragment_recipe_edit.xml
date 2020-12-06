@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
@@ -13,17 +15,32 @@
         android:layout_height="match_parent"
         tools:context=".ui.edit.RecipeEditFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/recipe_edit_name_label">
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.recipeDetail.recipe.name}"
-                />
+                android:hint="@string/recipe_edit_name_label">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.recipeDetail.recipe.name}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredient_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:items="@{viewModel.recipeDetail.ingredients}"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/list_item_ingredient_detail" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

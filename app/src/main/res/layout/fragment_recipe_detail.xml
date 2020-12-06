@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="de.foodbro.app.viewmodels.RecipeDetailViewModel" />
+            type="de.foodbro.app.ui.detail.RecipeDetailViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

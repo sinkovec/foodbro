@@ -1,4 +1,4 @@
-package de.foodbro.app.viewmodels
+package de.foodbro.app.ui.list
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

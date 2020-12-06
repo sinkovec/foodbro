@@ -1,43 +1,23 @@
 package de.foodbro.app.ui.detail
 
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import de.foodbro.app.R
 import de.foodbro.app.databinding.ListItemIngredientDetailBinding
 import de.foodbro.app.model.Ingredient
+import de.foodbro.app.ui.adapter.AbstractIngredientAdapter
 
-class IngredientAdapter: ListAdapter<Ingredient, RecyclerView.ViewHolder>(IngredientDiffCallback()) {
+class IngredientAdapter : AbstractIngredientAdapter<ListItemIngredientDetailBinding>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return IngredientViewHolder(
-            ListItemIngredientDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
-    }
+    override fun getLayout() = R.layout.list_item_ingredient_detail
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val ingredient = getItem(position)
-        (holder as IngredientViewHolder).bind(ingredient)
-    }
+    override fun getViewHolder(binding: ListItemIngredientDetailBinding):
+            AbstractIngredientAdapter.ViewHolder<ListItemIngredientDetailBinding> =
+        ViewHolder(binding)
 
-    class IngredientViewHolder(private val binding: ListItemIngredientDetailBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Ingredient) {
-            binding.apply {
-                ingredient = item
-                executePendingBindings()
-            }
+    inner class ViewHolder(binding: ListItemIngredientDetailBinding) :
+        AbstractIngredientAdapter.ViewHolder<ListItemIngredientDetailBinding>(binding) {
+
+        override fun bind(item: Ingredient) {
+            binding.ingredient = item
         }
-    }
-}
-
-private class IngredientDiffCallback : DiffUtil.ItemCallback<Ingredient>() {
-
-    override fun areItemsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
-        return oldItem == newItem
     }
 }
