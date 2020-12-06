@@ -1,4 +1,4 @@
-package de.foodbro.app.ui
+package de.foodbro.app.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.databinding.FragmentRecipeListBinding
-import de.foodbro.app.ui.adapter.RecipeAdapter
 import de.foodbro.app.viewmodels.RecipeListViewModel
 
 @AndroidEntryPoint

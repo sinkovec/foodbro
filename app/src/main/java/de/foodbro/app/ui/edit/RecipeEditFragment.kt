@@ -1,4 +1,4 @@
-package de.foodbro.app.ui
+package de.foodbro.app.ui.edit
 
 import android.os.Bundle
 import android.view.*
@@ -8,10 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.R
-import de.foodbro.app.databinding.FragmentRecipeDetailBinding
 import de.foodbro.app.databinding.FragmentRecipeEditBinding
-import de.foodbro.app.viewmodels.RecipeDetailViewModel
-import de.foodbro.app.viewmodels.RecipeEditViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint

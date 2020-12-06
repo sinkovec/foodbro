@@ -1,4 +1,4 @@
-package de.foodbro.app.ui.adapter
+package de.foodbro.app.ui.detail
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

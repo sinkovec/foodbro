@@ -68,8 +68,8 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.2.5'
 
     //    // Navigation component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
     // Google Material Design
     implementation 'com.google.android.material:material:1.2.1'

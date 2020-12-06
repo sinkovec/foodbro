@@ -1,4 +1,4 @@
-package de.foodbro.app.ui
+package de.foodbro.app.ui.detail
 
 import android.os.Bundle
 import android.view.*
@@ -9,8 +9,6 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.foodbro.app.R
 import de.foodbro.app.databinding.FragmentRecipeDetailBinding
-import de.foodbro.app.ui.adapter.IngredientAdapter
-import de.foodbro.app.ui.adapter.PreparationStepAdapter
 import de.foodbro.app.viewmodels.RecipeDetailViewModel
 import javax.inject.Inject
 
@@ -56,9 +54,10 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun navigateToRecipeEdit() {
-        val direction = RecipeDetailFragmentDirections.actionFragmentRecipeDetailDestToFragmentRecipeEditDest(
-            viewModel.recipeId
-        )
+        val direction =
+            RecipeDetailFragmentDirections.actionFragmentRecipeDetailDestToFragmentRecipeEditDest(
+                viewModel.recipeId
+            )
         findNavController().navigate(direction)
     }
 }

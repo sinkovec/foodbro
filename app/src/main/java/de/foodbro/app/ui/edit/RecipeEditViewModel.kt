@@ -1,4 +1,4 @@
-package de.foodbro.app.viewmodels
+package de.foodbro.app.ui.edit
 
 import androidx.lifecycle.*
 import com.squareup.inject.assisted.Assisted

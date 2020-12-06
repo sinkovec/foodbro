@@ -1,4 +1,4 @@
-package de.foodbro.app.ui.adapter
+package de.foodbro.app.ui.list
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import de.foodbro.app.model.Recipe
 import de.foodbro.app.databinding.ListItemRecipeBinding
-import de.foodbro.app.ui.RecipeListFragmentDirections
 
 class RecipeAdapter: ListAdapter<Recipe, RecyclerView.ViewHolder>(RecipeDiffCallback()) {
 

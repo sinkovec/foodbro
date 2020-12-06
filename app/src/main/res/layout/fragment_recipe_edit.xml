@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="de.foodbro.app.viewmodels.RecipeEditViewModel" />
+            type="de.foodbro.app.ui.edit.RecipeEditViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.RecipeEditFragment">
+        tools:context=".ui.edit.RecipeEditFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_recipe_list_dest"
-        android:name="de.foodbro.app.ui.RecipeListFragment"
+        android:name="de.foodbro.app.ui.list.RecipeListFragment"
         tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_fragment_recipe_list_dest_to_fragment_recipe_detail_dest"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/fragment_recipe_detail_dest"
-        android:name="de.foodbro.app.ui.RecipeDetailFragment"
+        android:name="de.foodbro.app.ui.detail.RecipeDetailFragment"
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipeId"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/recipeEditFragment"
-        android:name="de.foodbro.app.ui.RecipeEditFragment"
+        android:name="de.foodbro.app.ui.edit.RecipeEditFragment"
         android:label="fragment_recipe_edit"
         tools:layout="@layout/fragment_recipe_edit">
         <argument

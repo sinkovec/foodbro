@@ -17,6 +17,6 @@
         android:overScrollMode="never"
         android:items="@{viewModel.recipes}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context=".ui.RecipeListFragment"
+        tools:context=".ui.list.RecipeListFragment"
         tools:listitem="@layout/list_item_recipe" />
 </layout>
