@@ -54,6 +54,7 @@ class RecipeEditFragment : Fragment() {
     }
 
     private fun navigateToRecipeDetail() {
-        findNavController().navigateUp()
+        val action = RecipeEditFragmentDirections.actionFragmentRecipeEditDestToFragmentRecipeDetailDest(args.recipeId)
+        findNavController().navigate(action)
     }
 }

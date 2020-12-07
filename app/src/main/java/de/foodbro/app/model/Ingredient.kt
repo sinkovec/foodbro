@@ -1,22 +1,20 @@
 package de.foodbro.app.model
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import de.foodbro.app.data.converter.UnitsConverter
 
 @Entity(
     tableName = "ingredient_table",
+    indices = [Index("id")],
     foreignKeys = [
         ForeignKey(entity = Recipe::class, parentColumns = ["id"], childColumns = ["recipeId"],
-            onDelete = CASCADE)
+            onDelete = CASCADE, onUpdate = CASCADE)
     ]
 )
 data class Ingredient(
     @PrimaryKey(autoGenerate = true)
-    var id : Int,
+    var id : Long,
 
     var name : String,
 
@@ -25,6 +23,6 @@ data class Ingredient(
     @TypeConverters(UnitsConverter::class)
     var unit : Units,
 
-    var recipeId : Int
+    var recipeId : Long
 )
 

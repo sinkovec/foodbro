@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_recipe_detail">
         <argument
             android:name="recipeId"
-            app:argType="integer" />
+            app:argType="long" />
         <action
             android:id="@+id/action_fragment_recipe_detail_dest_to_fragment_recipe_edit_dest"
             app:destination="@id/recipeEditFragment" />
@@ -33,6 +33,9 @@
         tools:layout="@layout/fragment_recipe_edit">
         <argument
             android:name="recipeId"
-            app:argType="integer" />
+            app:argType="long" />
+        <action
+            android:id="@+id/action_fragment_recipe_edit_dest_to_fragment_recipe_detail_dest"
+            app:destination="@id/fragment_recipe_detail_dest" />
     </fragment>
 </navigation>

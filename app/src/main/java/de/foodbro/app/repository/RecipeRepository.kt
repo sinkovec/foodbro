@@ -1,7 +1,6 @@
 package de.foodbro.app.repository
 
 import de.foodbro.app.data.IngredientDao
-import de.foodbro.app.model.Recipe
 import de.foodbro.app.data.RecipeDao
 import de.foodbro.app.model.RecipeDetail
 import javax.inject.Inject
@@ -15,14 +14,11 @@ class RecipeRepository @Inject constructor(
 
     fun getRecipes() = recipeDao.getAll()
 
-    fun getRecipe(id: Int) = recipeDao.getById(id)
+    fun getRecipe(id: Long) = recipeDao.getById(id)
 
     suspend fun insert(recipeDetail: RecipeDetail) {
-        recipeDao.insert(recipeDetail.recipe)
-        recipeDetail.ingredients.forEach {
-            it.recipeId = recipeDetail.recipe.id
-        }
+        val id = recipeDao.insert(recipeDetail.recipe)
+        recipeDetail.ingredients.forEach { it.recipeId = id }
         ingredientDao.insertAll(recipeDetail.ingredients)
-
     }
 }

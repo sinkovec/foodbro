@@ -13,10 +13,10 @@ interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM recipe_table WHERE id = :id")
-    fun getById(id: Int): LiveData<RecipeDetail>
+    fun getById(id: Long): LiveData<RecipeDetail>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(recipe: Recipe)
+    suspend fun insert(recipe: Recipe): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(recipeList: List<Recipe>)

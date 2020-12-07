@@ -8,20 +8,20 @@ import de.foodbro.app.repository.RecipeRepository
 
 class RecipeDetailViewModel @AssistedInject constructor(
     private val recipeRepository: RecipeRepository,
-    @Assisted val recipeId: Int
+    @Assisted val recipeId: Long
 ): ViewModel() {
 
     val recipeDetail = recipeRepository.getRecipe(recipeId)
 
     @AssistedInject.Factory
     interface AssistedFactory {
-        fun create(recipeId: Int): RecipeDetailViewModel
+        fun create(recipeId: Long): RecipeDetailViewModel
     }
 
     companion object {
         fun provideFactory(
             assistedFactory: AssistedFactory,
-            recipeId: Int
+            recipeId: Long
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
